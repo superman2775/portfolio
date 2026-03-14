@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>super_man2775 | Portfolio</title>
+  <meta name="description" content="Portfolio of super_man2775 — teen builder from Belgium, extension creator, and lead dev." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --bg-2: #0f172a;
+      --accent: #19c2ff;
+      --accent-2: #8bff7a;
+      --accent-3: #ffb84d;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --text: #e6eef8;
+      --muted: #a8b3c7;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(1200px 800px at 10% -10%, #1b2a4d 0%, transparent 60%),
+                  radial-gradient(1000px 700px at 110% 10%, #163b2f 0%, transparent 65%),
+                  linear-gradient(135deg, var(--bg), var(--bg-2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: 1;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 32px 0 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .logo span {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
+      transition: text-shadow 0.2s ease;
+    }
+
+    .logo:hover span {
+      text-shadow: 0 0 18px rgba(25, 194, 255, 0.45), 0 0 32px rgba(139, 255, 122, 0.35);
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .hero-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(25, 194, 255, 0.3);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(25, 194, 255, 0.12);
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 12px;
+      font-size: clamp(2.2rem, 2.6vw + 1.5rem, 3.8rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .meta span {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.98rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #07101d;
+      box-shadow: 0 18px 32px rgba(25, 194, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 38px rgba(25, 194, 255, 0.35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid rgba(25, 194, 255, 0.7);
+      outline-offset: 3px;
+    }
+
+    .hero-right {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .stat {
+      background: var(--card-strong);
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: rgba(139, 255, 122, 0.3);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .stat h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .stat p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    section {
+      margin-top: 52px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(25, 194, 255, 0.28);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(350px 140px at 10% 0%, rgba(25, 194, 255, 0.22), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--muted);
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: var(--text);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 14, 28, 0.5);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      align-items: center;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(6px);
+      border-color: rgba(255, 184, 77, 0.4);
+      background: rgba(8, 14, 28, 0.7);
+    }
+
+    .timeline-link {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: transparent;
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .timeline-item.has-link .timeline-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-link:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .timeline-item span {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--accent-3);
+      font-size: 0.85rem;
+    }
+
+    .marquee {
+      display: flex;
+      gap: 16px;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 16px;
+      animation: scroll 18s linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .marquee span {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 64px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(8, 12, 24, 0.9);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <span>super_man2775</span> · portfolio
+      </div>
+      <nav>
+        <a href="#work">Work</a>
+        <a href="#extensions">Extensions</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="tag">Teen Builder · Belgium</div>
+        <h1>Hi there, I'm super_man2775!</h1>
+        <p class="subtitle">
+          15-year-old developer from Belgium focused on practical extensions, smooth UX, and learning fast by shipping.
+        </p>
+        <div class="meta">
+          <span>Location: Belgium</span>
+          <span>Age: 15</span>
+        </div>
+        <div class="cta-row" id="contact">
+          <button class="btn btn-primary" id="discordBtn">Contact on Discord</button>
+          <a class="btn btn-ghost" id="discordLink" href="https://discord.com/users/1349389611402662021" target="_blank" rel="noreferrer">Open Discord</a>
+          <a class="btn btn-ghost" href="https://github.com/superman2775" target="_blank" rel="noreferrer">More on GitHub</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="stat-grid">
+          <div class="stat">
+            <h3>Extensions</h3>
+            <p>Smartschool Assistant, Games, Results Leaderboard</p>
+          </div>
+          <div class="stat">
+            <h3>IT Learn</h3>
+            <p>Learn programming for free, with interactive lessons.</p>
+          </div>
+          <div class="stat">
+            <h3>Focus</h3>
+            <p>Education tech, usability, and performance</p>
+          </div>
+          <div class="stat">
+            <h3>200+ users</h3>
+            <p>Active users across all extensions and platforms</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <h2 class="section-title">Main Accomplishments</h2>
+      <div class="timeline">
+        <div class="timeline-item" data-link="https://itlearn.be/">
+          <span>Lead Dev</span>
+          <div>
+            <strong>IT Learn</strong>
+            <p>Build programming courses about HTML, CSS, GitHub, and other contributions.</p>
+          </div>
+          <button class="timeline-link" type="button">Open</button>
+        </div>
+        <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-GPT/">
+          <span>Extension</span>
+          <div>
+            <strong>Smartschool AI Assistant</strong>
+            <p>Ask your questions to an AI inside of Smartschool.</p>
+          </div>
+          <button class="timeline-link" type="button">Open</button>
+        </div>
+        <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-Games/">
+          <span>Extension</span>
+          <div>
+            <strong>Smartschool Games</strong>
+            <p>Play 6 different games in Smartschool.</p>
+          </div>
+          <button class="timeline-link" type="button">Open</button>
+        </div>
+        <div class="timeline-item" data-link="https://github.com/superman2775/smartschool-results-leaderboard/">
+          <span>Extension</span>
+          <div>
+            <strong>Smartschool Results Leaderboard</strong>
+            <p>Try to become the best student with an engaging leaderboard.</p>
+          </div>
+          <button class="timeline-link" type="button">Open</button>
+        </div>
+        <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-Achievements/">
+          <span>Extension</span>
+          <div>
+            <strong>[NEW] Smartschool Achievements</strong>
+            <p>Earn badges and unlock rewards while studying. With built-in leaderboard.</p>
+          </div>
+          <button class="timeline-link" type="button">Open</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="extensions">
+      <h2 class="section-title">Extension Lab</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>Assistant</strong>
+          <p>AI-powered help within Smartschool to answer questions and provide guidance.</p>
+          <div class="chip-row">
+            <span class="chip">AI Integration</span>
+            <span class="chip">API</span>
+            <span class="chip">AI Models</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Games</strong>
+          <p>Multiplayer games to make studying more engaging.</p>
+          <div class="chip-row">
+            <span class="chip">iFrame</span>
+            <span class="chip">Multiplayer</span>
+            <span class="chip">Motivation</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Results Leaderboard</strong>
+          <p>Track your progress and compete with peers in a fun, engaging way.</p>
+          <div class="chip-row">
+            <span class="chip">Analytics</span>
+            <span class="chip">Ranking UI</span>
+            <span class="chip">Community</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Skills + Stack</h2>
+      <div class="marquee">
+        <div class="marquee-track">
+          <span>JavaScript</span>
+          <span>Python</span>
+          <span>Frontend</span>
+          <span>Browser Extensions</span>
+          <span>UI/UX</span>
+          <span>Design Systems</span>
+          <span>Automation</span>
+          <span>Performance</span>
+          <span>Smartschool APIs</span>
+          <span>AI</span>
+          <span>Rapid Prototyping</span>
+          <span>Playful Interaction</span>
+        </div>
+        <div class="marquee-track">
+          <span>JavaScript</span>
+          <span>Python</span>
+          <span>Frontend</span>
+          <span>Browser Extensions</span>
+          <span>UI/UX</span>
+          <span>Design Systems</span>
+          <span>Automation</span>
+          <span>Performance</span>
+          <span>Smartschool APIs</span>
+          <span>AI</span>
+          <span>Rapid Prototyping</span>
+          <span>Playful Interaction</span>
+        </div>
+      </div>
+      <div class="grid" style="margin-top: 18px;">
+        <div class="card">
+          <strong>What I build</strong>
+          <p>Student-first tooling that removes friction and adds a little fun.</p>
+          <div class="chip-row">
+            <span class="chip">Chrome Extensions</span>
+            <span class="chip">Dashboards</span>
+            <span class="chip">Widgets</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>How I work</strong>
+          <p>Fast iteration, feedback loops, and shipping weekly.</p>
+          <div class="chip-row">
+            <span class="chip">Product thinking</span>
+            <span class="chip">Agile</span>
+            <span class="chip">Collaboration</span>
+          </div>
+        </div>
+        <div class="card">
+          <strong>Currently exploring</strong>
+          <p>AI helpers for study plans and smarter progress insights.</p>
+          <div class="chip-row">
+            <span class="chip">Personalization</span>
+            <span class="chip">Data viz</span>
+            <span class="chip">Automation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> super_man2775</div>
+      <div>Built for students, by a student</div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Discord handle copied: super_man2775</div>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    yearEl.textContent = new Date().getFullYear();
+
+    const toast = document.getElementById("toast");
+    const showToast = (message) => {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+
+    const discordHandle = "super_man2775";
+    const discordUserId = "";
+    const discordLinkEl = document.getElementById("discordLink");
+    if (discordUserId) {
+      discordLinkEl.href = `https://discord.com/users/${discordUserId}`;
+    } else {
+      discordLinkEl.style.display = "none";
+    }
+    document.getElementById("discordBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(discordHandle);
+        showToast(`Discord handle copied: ${discordHandle}`);
+      } catch {
+        showToast(`Discord handle: ${discordHandle}`);
+      }
+    });
+
+    document.getElementById("copyHandle").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(discordHandle);
+        showToast(`Discord handle copied: ${discordHandle}`);
+      } catch {
+        showToast(`Discord handle: ${discordHandle}`);
+      }
+    });
+
+    const root = document.documentElement;
+    let focusMode = false;
+    document.getElementById("toggleTheme").addEventListener("click", () => {
+      focusMode = !focusMode;
+      if (focusMode) {
+        root.style.setProperty("--accent", "#ffe66d");
+        root.style.setProperty("--accent-2", "#ff6b6b");
+        root.style.setProperty("--accent-3", "#6bcbff");
+        showToast("Focus mode on");
+      } else {
+        root.style.setProperty("--accent", "#19c2ff");
+        root.style.setProperty("--accent-2", "#8bff7a");
+        root.style.setProperty("--accent-3", "#ffb84d");
+        showToast("Focus mode off");
+      }
+    });
+
+    const energy = ["Charging", "Warming up", "Locked in", "Shipping", "Victory lap"];
+    const energyEl = document.getElementById("energyMeter");
+    let energyIndex = 0;
+    setInterval(() => {
+      energyIndex = (energyIndex + 1) % energy.length;
+      energyEl.textContent = energy[energyIndex];
+    }, 2200);
+
+    document.querySelectorAll(".timeline-item").forEach((item) => {
+      const link = (item.dataset.link || "").trim();
+      const btn = item.querySelector(".timeline-link");
+      if (!link) {
+        if (btn) {
+          btn.style.display = "none";
+        }
+        return;
+      }
+
+      const openLink = () => window.open(link, "_blank", "noreferrer");
+      item.classList.add("has-link");
+      item.tabIndex = 0;
+      item.setAttribute("role", "link");
+      item.setAttribute("aria-label", `Open link for ${item.querySelector("strong")?.textContent || "item"}`);
+
+      item.addEventListener("click", openLink);
+      item.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLink();
+        }
+      });
+
+      if (btn) {
+        btn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          openLink();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
