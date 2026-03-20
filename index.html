@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>super_man2775 | Portfolio</title>
-  <meta name="description" content="Portfolio of super_man2775 — teen builder from Belgium, extension creator, and lead dev." />
+  <meta id="metaDescription" name="description" content="Portfolio of super_man2775 — teen builder from Belgium, extension creator, and lead dev." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -23,6 +23,19 @@
       --radius: 18px;
     }
 
+    [data-theme="light"] {
+      --bg: #f6f2e9;
+      --bg-2: #f3f6ff;
+      --accent: #ff6f61;
+      --accent-2: #2a9d8f;
+      --accent-3: #f4a261;
+      --card: rgba(10, 12, 26, 0.06);
+      --card-strong: rgba(10, 12, 26, 0.1);
+      --text: #111625;
+      --muted: #4b5568;
+      --shadow: 0 20px 50px rgba(10, 12, 26, 0.15);
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -36,6 +49,12 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+    }
+
+    [data-theme="light"] body {
+      background: radial-gradient(1000px 700px at 10% -10%, #fff3df 0%, transparent 60%),
+                  radial-gradient(900px 650px at 110% 10%, #e0f6ff 0%, transparent 65%),
+                  linear-gradient(135deg, var(--bg), var(--bg-2));
     }
 
     .grain {
@@ -61,6 +80,7 @@
       align-items: center;
       gap: 16px;
       margin-bottom: 48px;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -86,6 +106,7 @@
       display: flex;
       gap: 16px;
       font-size: 0.95rem;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -225,6 +246,46 @@
     .btn:focus-visible {
       outline: 2px solid rgba(25, 194, 255, 0.7);
       outline-offset: 3px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control {
+      background: var(--card-strong);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      font-family: "IBM Plex Mono", monospace;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .control:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .control:focus-visible {
+      outline: 2px solid rgba(25, 194, 255, 0.7);
+      outline-offset: 3px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .hero-right {
@@ -470,192 +531,201 @@
   <div class="container">
     <header>
       <div class="logo">
-        <span>super_man2775</span> · portfolio
+        <span>super_man2775</span> · <span data-i18n="logo">portfolio</span>
       </div>
       <nav>
-        <a href="#work">Work</a>
-        <a href="#extensions">Extensions</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#extensions" data-i18n="nav.extensions">Extensions</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
+      <div class="controls">
+        <label class="sr-only" for="langSelect" data-i18n="label.language">Language</label>
+        <select class="control" id="langSelect" aria-label="Language">
+          <option value="en">English</option>
+          <option value="nl">Nederlands</option>
+          <option value="de-AT">Deutsch (AT)</option>
+          <option value="fr">Français</option>
+        </select>
+        <button class="control" id="themeToggle" type="button">Theme</button>
+      </div>
     </header>
 
     <section class="hero">
       <div class="hero-card">
-        <div class="tag">Teen Builder · Belgium</div>
-        <h1>Hi there, I'm super_man2775!</h1>
-        <p class="subtitle">
+        <div class="tag" data-i18n="tagline">Teen Builder · Belgium</div>
+        <h1 data-i18n="hero.title">Hi there, I'm super_man2775!</h1>
+        <p class="subtitle" data-i18n="hero.subtitle">
           15-year-old developer from Belgium focused on practical extensions, smooth UX, and learning fast by shipping.
         </p>
         <div class="meta">
-          <span>Location: Belgium</span>
-          <span>Age: 15</span>
+          <span data-i18n="meta.location">Location: Belgium</span>
+          <span data-i18n="meta.age">Age: 15</span>
         </div>
         <div class="cta-row" id="contact">
-          <button class="btn btn-primary" id="discordBtn">Contact on Discord</button>
-          <a class="btn btn-ghost" id="discordLink" href="https://discord.com/users/1349389611402662021" target="_blank" rel="noreferrer">Open Discord</a>
-          <a class="btn btn-ghost" href="https://github.com/superman2775" target="_blank" rel="noreferrer">More on GitHub</a>
+          <button class="btn btn-primary" id="discordBtn" data-i18n="cta.discord">Contact on Discord</button>
+          <a class="btn btn-ghost" id="discordLink" href="https://discord.com/users/1349389611402662021" target="_blank" rel="noreferrer" data-i18n="cta.openDiscord">Open Discord</a>
+          <a class="btn btn-ghost" href="https://github.com/superman2775" target="_blank" rel="noreferrer" data-i18n="cta.github">More on GitHub</a>
         </div>
       </div>
       <div class="hero-right">
         <div class="stat-grid">
           <div class="stat">
-            <h3>Extensions</h3>
-            <p>Smartschool Assistant, Games, Results Leaderboard</p>
+            <h3 data-i18n="stats.extensions.title">Extensions</h3>
+            <p data-i18n="stats.extensions.body">Smartschool Assistant, Games, Results Leaderboard</p>
           </div>
           <div class="stat">
-            <h3>IT Learn</h3>
-            <p>Learn programming for free, with interactive lessons.</p>
+            <h3 data-i18n="stats.itlearn.title">IT Learn</h3>
+            <p data-i18n="stats.itlearn.body">Learn programming for free, with interactive lessons.</p>
           </div>
           <div class="stat">
-            <h3>Focus</h3>
-            <p>Education tech, usability, and performance</p>
+            <h3 data-i18n="stats.focus.title">Focus</h3>
+            <p data-i18n="stats.focus.body">Education tech, usability, and performance</p>
           </div>
           <div class="stat">
-            <h3>200+ users</h3>
-            <p>Active users across all extensions and platforms</p>
+            <h3 data-i18n="stats.users.title">200+ users</h3>
+            <p data-i18n="stats.users.body">Active users across all extensions and platforms</p>
           </div>
         </div>
       </div>
     </section>
-
     <section id="work">
-      <h2 class="section-title">Main Accomplishments</h2>
+      <h2 class="section-title" data-i18n="work.title">Main Accomplishments</h2>
       <div class="timeline">
         <div class="timeline-item" data-link="https://itlearn.be/">
-          <span>Lead Dev</span>
+          <span data-i18n="work.itlearn.role">Lead Dev</span>
           <div>
             <strong>IT Learn</strong>
-            <p>Build programming courses about HTML, CSS, GitHub, and other contributions.</p>
+            <p data-i18n="work.itlearn.body">Build programming courses about HTML, CSS, GitHub, and other contributions.</p>
           </div>
-          <button class="timeline-link" type="button">Open</button>
+          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-GPT/">
-          <span>Extension</span>
+          <span data-i18n="work.extensionRole">Extension</span>
           <div>
             <strong>Smartschool AI Assistant</strong>
-            <p>Ask your questions to an AI inside of Smartschool.</p>
+            <p data-i18n="work.assistant.body">Ask your questions to an AI inside of Smartschool.</p>
           </div>
-          <button class="timeline-link" type="button">Open</button>
+          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-Games/">
-          <span>Extension</span>
+          <span data-i18n="work.extensionRole">Extension</span>
           <div>
             <strong>Smartschool Games</strong>
-            <p>Play 6 different games in Smartschool.</p>
+            <p data-i18n="work.games.body">Play 6 different games in Smartschool.</p>
           </div>
-          <button class="timeline-link" type="button">Open</button>
+          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/smartschool-results-leaderboard/">
-          <span>Extension</span>
+          <span data-i18n="work.extensionRole">Extension</span>
           <div>
             <strong>Smartschool Results Leaderboard</strong>
-            <p>Try to become the best student with an engaging leaderboard.</p>
+            <p data-i18n="work.results.body">Try to become the best student with an engaging leaderboard.</p>
           </div>
-          <button class="timeline-link" type="button">Open</button>
+          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-Achievements/">
-          <span>Extension</span>
+          <span data-i18n="work.extensionRole">Extension</span>
           <div>
             <strong>[NEW] Smartschool Achievements</strong>
-            <p>Earn badges and unlock rewards while studying. With built-in leaderboard.</p>
+            <p data-i18n="work.achievements.body">Earn badges and unlock rewards while studying. With built-in leaderboard.</p>
           </div>
-          <button class="timeline-link" type="button">Open</button>
+          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
         </div>
       </div>
     </section>
 
     <section id="extensions">
-      <h2 class="section-title">Extension Lab</h2>
+      <h2 class="section-title" data-i18n="extensions.title">Extension Lab</h2>
       <div class="grid">
         <div class="card">
-          <strong>Assistant</strong>
-          <p>AI-powered help within Smartschool to answer questions and provide guidance.</p>
+          <strong data-i18n="extensions.assistant.title">Assistant</strong>
+          <p data-i18n="extensions.assistant.body">AI-powered help within Smartschool to answer questions and provide guidance.</p>
           <div class="chip-row">
-            <span class="chip">AI Integration</span>
-            <span class="chip">API</span>
-            <span class="chip">AI Models</span>
+            <span class="chip" data-i18n="chips.aiIntegration">AI Integration</span>
+            <span class="chip" data-i18n="chips.api">API</span>
+            <span class="chip" data-i18n="chips.aiModels">AI Models</span>
           </div>
         </div>
         <div class="card">
-          <strong>Games</strong>
-          <p>Multiplayer games to make studying more engaging.</p>
+          <strong data-i18n="extensions.games.title">Games</strong>
+          <p data-i18n="extensions.games.body">Multiplayer games to make studying more engaging.</p>
           <div class="chip-row">
-            <span class="chip">iFrame</span>
-            <span class="chip">Multiplayer</span>
-            <span class="chip">Motivation</span>
+            <span class="chip" data-i18n="chips.iframe">iFrame</span>
+            <span class="chip" data-i18n="chips.multiplayer">Multiplayer</span>
+            <span class="chip" data-i18n="chips.motivation">Motivation</span>
           </div>
         </div>
         <div class="card">
-          <strong>Results Leaderboard</strong>
-          <p>Track your progress and compete with peers in a fun, engaging way.</p>
+          <strong data-i18n="extensions.results.title">Results Leaderboard</strong>
+          <p data-i18n="extensions.results.body">Track your progress and compete with peers in a fun, engaging way.</p>
           <div class="chip-row">
-            <span class="chip">Analytics</span>
-            <span class="chip">Ranking UI</span>
-            <span class="chip">Community</span>
+            <span class="chip" data-i18n="chips.analytics">Analytics</span>
+            <span class="chip" data-i18n="chips.rankingUi">Ranking UI</span>
+            <span class="chip" data-i18n="chips.community">Community</span>
           </div>
         </div>
       </div>
     </section>
 
     <section id="skills">
-      <h2 class="section-title">Skills + Stack</h2>
+      <h2 class="section-title" data-i18n="skills.title">Skills + Stack</h2>
       <div class="marquee">
         <div class="marquee-track">
-          <span>JavaScript</span>
-          <span>Python</span>
-          <span>Frontend</span>
-          <span>Browser Extensions</span>
-          <span>UI/UX</span>
-          <span>Design Systems</span>
-          <span>Automation</span>
-          <span>Performance</span>
-          <span>Smartschool APIs</span>
-          <span>AI</span>
-          <span>Rapid Prototyping</span>
-          <span>Playful Interaction</span>
+          <span data-i18n="skills.marquee.javascript">JavaScript</span>
+          <span data-i18n="skills.marquee.python">Python</span>
+          <span data-i18n="skills.marquee.frontend">Frontend</span>
+          <span data-i18n="skills.marquee.extensions">Browser Extensions</span>
+          <span data-i18n="skills.marquee.uiux">UI/UX</span>
+          <span data-i18n="skills.marquee.designSystems">Design Systems</span>
+          <span data-i18n="skills.marquee.automation">Automation</span>
+          <span data-i18n="skills.marquee.performance">Performance</span>
+          <span data-i18n="skills.marquee.smartschoolApis">Smartschool APIs</span>
+          <span data-i18n="skills.marquee.ai">AI</span>
+          <span data-i18n="skills.marquee.rapid">Rapid Prototyping</span>
+          <span data-i18n="skills.marquee.playful">Playful Interaction</span>
         </div>
         <div class="marquee-track">
-          <span>JavaScript</span>
-          <span>Python</span>
-          <span>Frontend</span>
-          <span>Browser Extensions</span>
-          <span>UI/UX</span>
-          <span>Design Systems</span>
-          <span>Automation</span>
-          <span>Performance</span>
-          <span>Smartschool APIs</span>
-          <span>AI</span>
-          <span>Rapid Prototyping</span>
-          <span>Playful Interaction</span>
+          <span data-i18n="skills.marquee.javascript">JavaScript</span>
+          <span data-i18n="skills.marquee.python">Python</span>
+          <span data-i18n="skills.marquee.frontend">Frontend</span>
+          <span data-i18n="skills.marquee.extensions">Browser Extensions</span>
+          <span data-i18n="skills.marquee.uiux">UI/UX</span>
+          <span data-i18n="skills.marquee.designSystems">Design Systems</span>
+          <span data-i18n="skills.marquee.automation">Automation</span>
+          <span data-i18n="skills.marquee.performance">Performance</span>
+          <span data-i18n="skills.marquee.smartschoolApis">Smartschool APIs</span>
+          <span data-i18n="skills.marquee.ai">AI</span>
+          <span data-i18n="skills.marquee.rapid">Rapid Prototyping</span>
+          <span data-i18n="skills.marquee.playful">Playful Interaction</span>
         </div>
       </div>
       <div class="grid" style="margin-top: 18px;">
         <div class="card">
-          <strong>What I build</strong>
-          <p>Student-first tooling that removes friction and adds a little fun.</p>
+          <strong data-i18n="skills.cards.build.title">What I build</strong>
+          <p data-i18n="skills.cards.build.body">Student-first tooling that removes friction and adds a little fun.</p>
           <div class="chip-row">
-            <span class="chip">Chrome Extensions</span>
-            <span class="chip">Dashboards</span>
-            <span class="chip">Widgets</span>
+            <span class="chip" data-i18n="chips.chromeExtensions">Chrome Extensions</span>
+            <span class="chip" data-i18n="chips.dashboards">Dashboards</span>
+            <span class="chip" data-i18n="chips.widgets">Widgets</span>
           </div>
         </div>
         <div class="card">
-          <strong>How I work</strong>
-          <p>Fast iteration, feedback loops, and shipping weekly.</p>
+          <strong data-i18n="skills.cards.work.title">How I work</strong>
+          <p data-i18n="skills.cards.work.body">Fast iteration, feedback loops, and shipping weekly.</p>
           <div class="chip-row">
-            <span class="chip">Product thinking</span>
-            <span class="chip">Agile</span>
-            <span class="chip">Collaboration</span>
+            <span class="chip" data-i18n="chips.productThinking">Product thinking</span>
+            <span class="chip" data-i18n="chips.agile">Agile</span>
+            <span class="chip" data-i18n="chips.collaboration">Collaboration</span>
           </div>
         </div>
         <div class="card">
-          <strong>Currently exploring</strong>
-          <p>AI helpers for study plans and smarter progress insights.</p>
+          <strong data-i18n="skills.cards.explore.title">Currently exploring</strong>
+          <p data-i18n="skills.cards.explore.body">AI helpers for study plans and smarter progress insights.</p>
           <div class="chip-row">
-            <span class="chip">Personalization</span>
-            <span class="chip">Data viz</span>
-            <span class="chip">Automation</span>
+            <span class="chip" data-i18n="chips.personalization">Personalization</span>
+            <span class="chip" data-i18n="chips.dataViz">Data viz</span>
+            <span class="chip" data-i18n="chips.automation">Automation</span>
           </div>
         </div>
       </div>
@@ -663,7 +733,7 @@
 
     <footer>
       <div>© <span id="year"></span> super_man2775</div>
-      <div>Built for students, by a student</div>
+      <div data-i18n="footer.tagline">Built for students, by a student</div>
     </footer>
   </div>
 
@@ -673,6 +743,397 @@
     const yearEl = document.getElementById("year");
     yearEl.textContent = new Date().getFullYear();
 
+    const translations = {
+      en: {
+        title: "super_man2775 | Portfolio",
+        description: "Portfolio of super_man2775 — teen builder from Belgium, extension creator, and lead dev.",
+        logo: "portfolio",
+        "label.language": "Language",
+        "label.theme": "Theme",
+        "theme.light": "Light mode",
+        "theme.dark": "Dark mode",
+        "nav.work": "Work",
+        "nav.extensions": "Extensions",
+        "nav.skills": "Skills",
+        "nav.contact": "Contact",
+        tagline: "Teen Builder · Belgium",
+        "hero.title": "Hi there, I'm super_man2775!",
+        "hero.subtitle": "15-year-old developer from Belgium focused on practical extensions, smooth UX, and learning fast by shipping.",
+        "meta.location": "Location: Belgium",
+        "meta.age": "Age: 15",
+        "cta.discord": "Contact on Discord",
+        "cta.openDiscord": "Open Discord",
+        "cta.github": "More on GitHub",
+        "cta.open": "Open",
+        "stats.extensions.title": "Extensions",
+        "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
+        "stats.itlearn.title": "IT Learn",
+        "stats.itlearn.body": "Learn programming for free, with interactive lessons.",
+        "stats.focus.title": "Focus",
+        "stats.focus.body": "Education tech, usability, and performance",
+        "stats.users.title": "200+ users",
+        "stats.users.body": "Active users across all extensions and platforms",
+        "work.title": "Main Accomplishments",
+        "work.itlearn.role": "Lead Dev",
+        "work.itlearn.body": "Build programming courses about HTML, CSS, GitHub, and other contributions.",
+        "work.extensionRole": "Extension",
+        "work.assistant.body": "Ask your questions to an AI inside of Smartschool.",
+        "work.games.body": "Play 6 different games in Smartschool.",
+        "work.results.body": "Try to become the best student with an engaging leaderboard.",
+        "work.achievements.body": "Earn badges and unlock rewards while studying. With built-in leaderboard.",
+        "extensions.title": "Extension Lab",
+        "extensions.assistant.title": "Assistant",
+        "extensions.assistant.body": "AI-powered help within Smartschool to answer questions and provide guidance.",
+        "extensions.games.title": "Games",
+        "extensions.games.body": "Multiplayer games to make studying more engaging.",
+        "extensions.results.title": "Results Leaderboard",
+        "extensions.results.body": "Track your progress and compete with peers in a fun, engaging way.",
+        "skills.title": "Skills + Stack",
+        "skills.marquee.javascript": "JavaScript",
+        "skills.marquee.python": "Python",
+        "skills.marquee.frontend": "Frontend",
+        "skills.marquee.extensions": "Browser Extensions",
+        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.designSystems": "Design Systems",
+        "skills.marquee.automation": "Automation",
+        "skills.marquee.performance": "Performance",
+        "skills.marquee.smartschoolApis": "Smartschool APIs",
+        "skills.marquee.ai": "AI",
+        "skills.marquee.rapid": "Rapid Prototyping",
+        "skills.marquee.playful": "Playful Interaction",
+        "skills.cards.build.title": "What I build",
+        "skills.cards.build.body": "Student-first tooling that removes friction and adds a little fun.",
+        "skills.cards.work.title": "How I work",
+        "skills.cards.work.body": "Fast iteration, feedback loops, and shipping weekly.",
+        "skills.cards.explore.title": "Currently exploring",
+        "skills.cards.explore.body": "AI helpers for study plans and smarter progress insights.",
+        "footer.tagline": "Built for students, by a student",
+        "chips.aiIntegration": "AI Integration",
+        "chips.api": "API",
+        "chips.aiModels": "AI Models",
+        "chips.iframe": "iFrame",
+        "chips.multiplayer": "Multiplayer",
+        "chips.motivation": "Motivation",
+        "chips.analytics": "Analytics",
+        "chips.rankingUi": "Ranking UI",
+        "chips.community": "Community",
+        "chips.chromeExtensions": "Chrome Extensions",
+        "chips.dashboards": "Dashboards",
+        "chips.widgets": "Widgets",
+        "chips.productThinking": "Product thinking",
+        "chips.agile": "Agile",
+        "chips.collaboration": "Collaboration",
+        "chips.personalization": "Personalization",
+        "chips.dataViz": "Data viz",
+        "chips.automation": "Automation",
+        "toast.copied": "Discord handle copied",
+        "toast.handle": "Discord handle"
+      },
+      nl: {
+        title: "super_man2775 | Portfolio",
+        description: "Portfolio van super_man2775 — tienerbouwer uit België, extensiemaker en lead dev.",
+        logo: "portfolio",
+        "label.language": "Taal",
+        "label.theme": "Thema",
+        "theme.light": "Lichte modus",
+        "theme.dark": "Donkere modus",
+        "nav.work": "Werk",
+        "nav.extensions": "Extensies",
+        "nav.skills": "Skills",
+        "nav.contact": "Contact",
+        tagline: "Tienerbouwer · België",
+        "hero.title": "Hoi, ik ben super_man2775!",
+        "hero.subtitle": "15-jarige ontwikkelaar uit België, gericht op praktische extensies, soepele UX en snel leren door te shippen.",
+        "meta.location": "Locatie: België",
+        "meta.age": "Leeftijd: 15",
+        "cta.discord": "Contact op Discord",
+        "cta.openDiscord": "Open Discord",
+        "cta.github": "Meer op GitHub",
+        "cta.open": "Open",
+        "stats.extensions.title": "Extensies",
+        "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
+        "stats.itlearn.title": "IT Learn",
+        "stats.itlearn.body": "Leer gratis programmeren met interactieve lessen.",
+        "stats.focus.title": "Focus",
+        "stats.focus.body": "Edtech, usability en performance",
+        "stats.users.title": "200+ gebruikers",
+        "stats.users.body": "Actieve gebruikers over alle extensies en platformen",
+        "work.title": "Belangrijkste prestaties",
+        "work.itlearn.role": "Lead Dev",
+        "work.itlearn.body": "Bouw programmeercursussen over HTML, CSS, GitHub en meer.",
+        "work.extensionRole": "Extensie",
+        "work.assistant.body": "Stel je vragen aan een AI binnen Smartschool.",
+        "work.games.body": "Speel 6 verschillende games in Smartschool.",
+        "work.results.body": "Word de beste student met een aantrekkelijke leaderboard.",
+        "work.achievements.body": "Verdien badges en ontgrendel rewards tijdens het studeren. Met ingebouwde leaderboard.",
+        "extensions.title": "Extensie Lab",
+        "extensions.assistant.title": "Assistent",
+        "extensions.assistant.body": "AI-hulp in Smartschool om vragen te beantwoorden en begeleiding te geven.",
+        "extensions.games.title": "Games",
+        "extensions.games.body": "Multiplayergames om studeren leuker te maken.",
+        "extensions.results.title": "Resultaten Leaderboard",
+        "extensions.results.body": "Volg je voortgang en competitief met een leuke leaderboard.",
+        "skills.title": "Skills + Stack",
+        "skills.marquee.javascript": "JavaScript",
+        "skills.marquee.python": "Python",
+        "skills.marquee.frontend": "Frontend",
+        "skills.marquee.extensions": "Browserextensies",
+        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.designSystems": "Designsystemen",
+        "skills.marquee.automation": "Automatisering",
+        "skills.marquee.performance": "Performance",
+        "skills.marquee.smartschoolApis": "Smartschool API's",
+        "skills.marquee.ai": "AI",
+        "skills.marquee.rapid": "Rapid Prototyping",
+        "skills.marquee.playful": "Speelse interactie",
+        "skills.cards.build.title": "Wat ik bouw",
+        "skills.cards.build.body": "Student-first tools die frictie wegnemen en wat fun toevoegen.",
+        "skills.cards.work.title": "Hoe ik werk",
+        "skills.cards.work.body": "Snelle iteraties, feedbackloops en wekelijks shippen.",
+        "skills.cards.explore.title": "Momenteel aan het verkennen",
+        "skills.cards.explore.body": "AI-helpers voor studieplannen en slimmere voortgangsinzichten.",
+        "footer.tagline": "Gebouwd voor studenten, door een student",
+        "chips.aiIntegration": "AI-integratie",
+        "chips.api": "API",
+        "chips.aiModels": "AI-modellen",
+        "chips.iframe": "iFrame",
+        "chips.multiplayer": "Multiplayer",
+        "chips.motivation": "Motivatie",
+        "chips.analytics": "Analytics",
+        "chips.rankingUi": "Ranking UI",
+        "chips.community": "Community",
+        "chips.chromeExtensions": "Chrome-extensies",
+        "chips.dashboards": "Dashboards",
+        "chips.widgets": "Widgets",
+        "chips.productThinking": "Productdenken",
+        "chips.agile": "Agile",
+        "chips.collaboration": "Samenwerking",
+        "chips.personalization": "Personalisatie",
+        "chips.dataViz": "Data viz",
+        "chips.automation": "Automatisering",
+        "toast.copied": "Discord-naam gekopieerd",
+        "toast.handle": "Discord-naam"
+      },
+      "de-AT": {
+        title: "super_man2775 | Portfolio",
+        description: "Portfolio von super_man2775 — Teen-Builder aus Belgien, Extension-Creator und Lead Dev.",
+        logo: "Portfolio",
+        "label.language": "Sprache",
+        "label.theme": "Design",
+        "theme.light": "Heller Modus",
+        "theme.dark": "Dunkler Modus",
+        "nav.work": "Arbeit",
+        "nav.extensions": "Extensions",
+        "nav.skills": "Skills",
+        "nav.contact": "Kontakt",
+        tagline: "Teen-Builder · Belgien",
+        "hero.title": "Hi, ich bin super_man2775!",
+        "hero.subtitle": "15-jähriger Entwickler aus Belgien mit Fokus auf praktische Extensions, smoothes UX und schnelles Lernen durch Shippen.",
+        "meta.location": "Standort: Belgien",
+        "meta.age": "Alter: 15",
+        "cta.discord": "Kontakt auf Discord",
+        "cta.openDiscord": "Discord öffnen",
+        "cta.github": "Mehr auf GitHub",
+        "cta.open": "Öffnen",
+        "stats.extensions.title": "Extensions",
+        "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
+        "stats.itlearn.title": "IT Learn",
+        "stats.itlearn.body": "Programmieren kostenlos lernen, mit interaktiven Lektionen.",
+        "stats.focus.title": "Fokus",
+        "stats.focus.body": "EdTech, Usability und Performance",
+        "stats.users.title": "200+ Nutzer",
+        "stats.users.body": "Aktive Nutzer über alle Extensions und Plattformen",
+        "work.title": "Wichtigste Erfolge",
+        "work.itlearn.role": "Lead Dev",
+        "work.itlearn.body": "Programmierkurse zu HTML, CSS, GitHub und mehr erstellen.",
+        "work.extensionRole": "Extension",
+        "work.assistant.body": "Stell deine Fragen an eine KI in Smartschool.",
+        "work.games.body": "Spiele 6 verschiedene Games in Smartschool.",
+        "work.results.body": "Werde mit einem packenden Leaderboard der beste Schüler.",
+        "work.achievements.body": "Verdiene Badges und schalte Rewards frei. Mit integriertem Leaderboard.",
+        "extensions.title": "Extension Lab",
+        "extensions.assistant.title": "Assistant",
+        "extensions.assistant.body": "KI-gestützte Hilfe in Smartschool für Antworten und Guidance.",
+        "extensions.games.title": "Games",
+        "extensions.games.body": "Multiplayer-Games, die Lernen spannender machen.",
+        "extensions.results.title": "Results Leaderboard",
+        "extensions.results.body": "Tracke deinen Fortschritt und konkurriere auf einer coolen Leaderboard.",
+        "skills.title": "Skills + Stack",
+        "skills.marquee.javascript": "JavaScript",
+        "skills.marquee.python": "Python",
+        "skills.marquee.frontend": "Frontend",
+        "skills.marquee.extensions": "Browser-Extensions",
+        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.designSystems": "Design-Systeme",
+        "skills.marquee.automation": "Automatisierung",
+        "skills.marquee.performance": "Performance",
+        "skills.marquee.smartschoolApis": "Smartschool APIs",
+        "skills.marquee.ai": "KI",
+        "skills.marquee.rapid": "Rapid Prototyping",
+        "skills.marquee.playful": "Spielerische Interaktion",
+        "skills.cards.build.title": "Was ich baue",
+        "skills.cards.build.body": "Student-first Tools, die Reibung entfernen und Spaß hinzufügen.",
+        "skills.cards.work.title": "Wie ich arbeite",
+        "skills.cards.work.body": "Schnelle Iteration, Feedback-Loops und wöchentlich shippen.",
+        "skills.cards.explore.title": "Aktuell am Erkunden",
+        "skills.cards.explore.body": "KI-Helfer für Lernpläne und smartere Fortschritts-Insights.",
+        "footer.tagline": "Gebaut für Studierende, von einem Studierenden",
+        "chips.aiIntegration": "KI-Integration",
+        "chips.api": "API",
+        "chips.aiModels": "KI-Modelle",
+        "chips.iframe": "iFrame",
+        "chips.multiplayer": "Multiplayer",
+        "chips.motivation": "Motivation",
+        "chips.analytics": "Analytics",
+        "chips.rankingUi": "Ranking UI",
+        "chips.community": "Community",
+        "chips.chromeExtensions": "Chrome-Extensions",
+        "chips.dashboards": "Dashboards",
+        "chips.widgets": "Widgets",
+        "chips.productThinking": "Produktdenken",
+        "chips.agile": "Agile",
+        "chips.collaboration": "Zusammenarbeit",
+        "chips.personalization": "Personalisierung",
+        "chips.dataViz": "Data Viz",
+        "chips.automation": "Automatisierung",
+        "toast.copied": "Discord-Handle kopiert",
+        "toast.handle": "Discord-Handle"
+      },
+      fr: {
+        title: "super_man2775 | Portfolio",
+        description: "Portfolio de super_man2775 — teen builder belge, créateur d’extensions et lead dev.",
+        logo: "portfolio",
+        "label.language": "Langue",
+        "label.theme": "Thème",
+        "theme.light": "Mode clair",
+        "theme.dark": "Mode sombre",
+        "nav.work": "Travaux",
+        "nav.extensions": "Extensions",
+        "nav.skills": "Compétences",
+        "nav.contact": "Contact",
+        tagline: "Teen builder · Belgique",
+        "hero.title": "Salut, je suis super_man2775 !",
+        "hero.subtitle": "Développeur de 15 ans en Belgique, axé sur des extensions pratiques, une UX fluide et l’apprentissage rapide en livrant.",
+        "meta.location": "Lieu : Belgique",
+        "meta.age": "Âge : 15",
+        "cta.discord": "Contacter sur Discord",
+        "cta.openDiscord": "Ouvrir Discord",
+        "cta.github": "Plus sur GitHub",
+        "cta.open": "Ouvrir",
+        "stats.extensions.title": "Extensions",
+        "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
+        "stats.itlearn.title": "IT Learn",
+        "stats.itlearn.body": "Apprendre à coder gratuitement avec des leçons interactives.",
+        "stats.focus.title": "Focus",
+        "stats.focus.body": "EdTech, ergonomie et performance",
+        "stats.users.title": "200+ utilisateurs",
+        "stats.users.body": "Utilisateurs actifs sur toutes les extensions et plateformes",
+        "work.title": "Principales réalisations",
+        "work.itlearn.role": "Lead Dev",
+        "work.itlearn.body": "Créer des cours sur HTML, CSS, GitHub et plus encore.",
+        "work.extensionRole": "Extension",
+        "work.assistant.body": "Posez vos questions à une IA dans Smartschool.",
+        "work.games.body": "Jouez à 6 jeux différents dans Smartschool.",
+        "work.results.body": "Devenez le meilleur élève avec un leaderboard engageant.",
+        "work.achievements.body": "Gagnez des badges et débloquez des récompenses. Avec leaderboard intégré.",
+        "extensions.title": "Extension Lab",
+        "extensions.assistant.title": "Assistant",
+        "extensions.assistant.body": "Aide propulsée par l’IA dans Smartschool pour répondre et guider.",
+        "extensions.games.title": "Jeux",
+        "extensions.games.body": "Jeux multijoueurs pour rendre l’étude plus fun.",
+        "extensions.results.title": "Results Leaderboard",
+        "extensions.results.body": "Suivez vos progrès et rivalisez avec vos pairs.",
+        "skills.title": "Compétences + Stack",
+        "skills.marquee.javascript": "JavaScript",
+        "skills.marquee.python": "Python",
+        "skills.marquee.frontend": "Frontend",
+        "skills.marquee.extensions": "Extensions navigateur",
+        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.designSystems": "Design systems",
+        "skills.marquee.automation": "Automatisation",
+        "skills.marquee.performance": "Performance",
+        "skills.marquee.smartschoolApis": "Smartschool APIs",
+        "skills.marquee.ai": "IA",
+        "skills.marquee.rapid": "Prototypage rapide",
+        "skills.marquee.playful": "Interaction ludique",
+        "skills.cards.build.title": "Ce que je construis",
+        "skills.cards.build.body": "Des outils student-first qui réduisent la friction et ajoutent du fun.",
+        "skills.cards.work.title": "Ma façon de travailler",
+        "skills.cards.work.body": "Itération rapide, boucles de feedback et livraisons hebdo.",
+        "skills.cards.explore.title": "En exploration",
+        "skills.cards.explore.body": "Des assistants IA pour les plans d’étude et des insights plus malins.",
+        "footer.tagline": "Conçu pour les étudiants, par un étudiant",
+        "chips.aiIntegration": "Intégration IA",
+        "chips.api": "API",
+        "chips.aiModels": "Modèles IA",
+        "chips.iframe": "iFrame",
+        "chips.multiplayer": "Multijoueur",
+        "chips.motivation": "Motivation",
+        "chips.analytics": "Analytics",
+        "chips.rankingUi": "Ranking UI",
+        "chips.community": "Communauté",
+        "chips.chromeExtensions": "Extensions Chrome",
+        "chips.dashboards": "Tableaux de bord",
+        "chips.widgets": "Widgets",
+        "chips.productThinking": "Pensée produit",
+        "chips.agile": "Agile",
+        "chips.collaboration": "Collaboration",
+        "chips.personalization": "Personnalisation",
+        "chips.dataViz": "Data viz",
+        "chips.automation": "Automatisation",
+        "toast.copied": "Pseudo Discord copié",
+        "toast.handle": "Pseudo Discord"
+      }
+    };
+
+    const i18nElements = Array.from(document.querySelectorAll("[data-i18n]"));
+    const langSelect = document.getElementById("langSelect");
+    const themeToggle = document.getElementById("themeToggle");
+    const metaDescription = document.getElementById("metaDescription");
+    const root = document.documentElement;
+
+    const applyTranslations = (lang) => {
+      const dictionary = translations[lang] || translations.en;
+      i18nElements.forEach((el) => {
+        const key = el.dataset.i18n;
+        if (dictionary[key]) {
+          el.textContent = dictionary[key];
+        }
+      });
+      document.title = dictionary.title || translations.en.title;
+      if (metaDescription) {
+        metaDescription.setAttribute("content", dictionary.description || translations.en.description);
+      }
+      themeToggle.textContent = root.dataset.theme === "light" ? dictionary["theme.dark"] : dictionary["theme.light"];
+      langSelect.setAttribute("aria-label", dictionary["label.language"]);
+      root.setAttribute("lang", lang);
+    };
+
+    const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+    const savedTheme = localStorage.getItem("theme") || (prefersLight ? "light" : "dark");
+    root.dataset.theme = savedTheme;
+
+    const updateThemeLabel = (lang) => {
+      const dictionary = translations[lang] || translations.en;
+      themeToggle.textContent = root.dataset.theme === "light" ? dictionary["theme.dark"] : dictionary["theme.light"];
+    };
+
+    themeToggle.addEventListener("click", () => {
+      root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", root.dataset.theme);
+      updateThemeLabel(langSelect.value);
+    });
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    langSelect.value = translations[savedLang] ? savedLang : "en";
+    applyTranslations(langSelect.value);
+
+    langSelect.addEventListener("change", (event) => {
+      const lang = event.target.value;
+      localStorage.setItem("lang", lang);
+      applyTranslations(lang);
+    });
+
     const toast = document.getElementById("toast");
     const showToast = (message) => {
       toast.textContent = message;
@@ -681,7 +1142,7 @@
     };
 
     const discordHandle = "super_man2775";
-    const discordUserId = "";
+    const discordUserId = "1349389611402662021";
     const discordLinkEl = document.getElementById("discordLink");
     if (discordUserId) {
       discordLinkEl.href = `https://discord.com/users/${discordUserId}`;
@@ -689,47 +1150,14 @@
       discordLinkEl.style.display = "none";
     }
     document.getElementById("discordBtn").addEventListener("click", async () => {
+      const dictionary = translations[langSelect.value] || translations.en;
       try {
         await navigator.clipboard.writeText(discordHandle);
-        showToast(`Discord handle copied: ${discordHandle}`);
+        showToast(`${dictionary["toast.copied"]}: ${discordHandle}`);
       } catch {
-        showToast(`Discord handle: ${discordHandle}`);
+        showToast(`${dictionary["toast.handle"]}: ${discordHandle}`);
       }
     });
-
-    document.getElementById("copyHandle").addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(discordHandle);
-        showToast(`Discord handle copied: ${discordHandle}`);
-      } catch {
-        showToast(`Discord handle: ${discordHandle}`);
-      }
-    });
-
-    const root = document.documentElement;
-    let focusMode = false;
-    document.getElementById("toggleTheme").addEventListener("click", () => {
-      focusMode = !focusMode;
-      if (focusMode) {
-        root.style.setProperty("--accent", "#ffe66d");
-        root.style.setProperty("--accent-2", "#ff6b6b");
-        root.style.setProperty("--accent-3", "#6bcbff");
-        showToast("Focus mode on");
-      } else {
-        root.style.setProperty("--accent", "#19c2ff");
-        root.style.setProperty("--accent-2", "#8bff7a");
-        root.style.setProperty("--accent-3", "#ffb84d");
-        showToast("Focus mode off");
-      }
-    });
-
-    const energy = ["Charging", "Warming up", "Locked in", "Shipping", "Victory lap"];
-    const energyEl = document.getElementById("energyMeter");
-    let energyIndex = 0;
-    setInterval(() => {
-      energyIndex = (energyIndex + 1) % energy.length;
-      energyEl.textContent = energy[energyIndex];
-    }, 2200);
 
     document.querySelectorAll(".timeline-item").forEach((item) => {
       const link = (item.dataset.link || "").trim();
