@@ -1,543 +1,508 @@
-﻿<!doctype html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>super_man2775 | Portfolio</title>
-  <meta id="metaDescription" name="description" content="Portfolio of super_man2775 — teen builder from Belgium, extension creator, and lead dev." />
+  <title id="pageTitle">super_man2775 | Portfolio</title>
+  <meta id="metaDescription" name="description" content="Portfolio of super_man2775, teen builder from Belgium, extension creator, and lead dev." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0b0f1a;
-      --bg-2: #0f172a;
-      --accent: #19c2ff;
-      --accent-2: #8bff7a;
-      --accent-3: #ffb84d;
-      --card: rgba(255, 255, 255, 0.06);
-      --card-strong: rgba(255, 255, 255, 0.12);
-      --text: #e6eef8;
-      --muted: #a8b3c7;
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      --radius: 18px;
+      --navy:    #093C5D;
+      --steel:   #3B7597;
+      --sky:     #6FD1D7;
+      --mint:    #5DF8D8;
+
+      --bg:      #060f18;
+      --bg-2:    #0a1a28;
+      --surface: #0e2236;
+      --border:  #1a3a52;
+      --border-2:#225070;
+      --text:    #ddeef6;
+      --muted:   #6fa0bc;
+      --radius:  4px;
     }
 
     [data-theme="light"] {
-      --bg: #f6f2e9;
-      --bg-2: #f3f6ff;
-      --accent: #ff6f61;
-      --accent-2: #2a9d8f;
-      --accent-3: #f4a261;
-      --card: rgba(10, 12, 26, 0.06);
-      --card-strong: rgba(10, 12, 26, 0.1);
-      --text: #111625;
-      --muted: #4b5568;
-      --shadow: 0 20px 50px rgba(10, 12, 26, 0.15);
+      --bg:      #f0f7fb;
+      --bg-2:    #e3eff7;
+      --surface: #ffffff;
+      --border:  #b8d4e4;
+      --border-2:#3B7597;
+      --text:    #062234;
+      --muted:   #3B7597;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
-      background: radial-gradient(1200px 800px at 10% -10%, #1b2a4d 0%, transparent 60%),
-                  radial-gradient(1000px 700px at 110% 10%, #163b2f 0%, transparent 65%),
-                  linear-gradient(135deg, var(--bg), var(--bg-2));
+      font-family: "Syne", sans-serif;
+      background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    [data-theme="light"] body {
-      background: radial-gradient(1000px 700px at 10% -10%, #fff3df 0%, transparent 60%),
-                  radial-gradient(900px 650px at 110% 10%, #e0f6ff 0%, transparent 65%),
-                  linear-gradient(135deg, var(--bg), var(--bg-2));
-    }
-
-    .grain {
+    /* Subtle dot grid background */
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
+      background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.35;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
-      mix-blend-mode: soft-light;
-      z-index: 1;
+      z-index: 0;
     }
 
     .container {
-      width: min(1100px, 92vw);
+      width: min(1080px, 92vw);
       margin: 0 auto;
-      padding: 32px 0 80px;
+      padding: 36px 0 100px;
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
+    /* HEADER */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      margin-bottom: 48px;
+      margin-bottom: 60px;
       flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
     }
 
     .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
+      font-family: "DM Mono", monospace;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--sky);
+      letter-spacing: 0.04em;
     }
 
-    .logo span {
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      color: transparent;
-      transition: text-shadow 0.2s ease;
-    }
-
-    .logo:hover span {
-      text-shadow: 0 0 18px rgba(25, 194, 255, 0.45), 0 0 32px rgba(139, 255, 122, 0.35);
+    .logo em {
+      color: var(--muted);
+      font-style: normal;
     }
 
     nav {
       display: flex;
-      gap: 16px;
-      font-size: 0.95rem;
+      gap: 24px;
+      font-size: 0.88rem;
+      font-family: "DM Mono", monospace;
       flex-wrap: wrap;
     }
 
     nav a {
       color: var(--muted);
       text-decoration: none;
-      position: relative;
-      transition: color 0.2s ease;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.15s;
     }
+    nav a:hover { color: var(--sky); }
 
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.25s ease;
-    }
-
-    nav a:hover {
-      color: var(--text);
-    }
-
-    nav a:hover::after {
-      transform: scaleX(1);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 32px;
-      align-items: center;
-      margin-bottom: 56px;
-    }
-
-    .hero-card {
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 28px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-
-    .hero-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(25, 194, 255, 0.3);
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
-    }
-
-    .tag {
-      display: inline-flex;
+    .controls {
+      display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    .control {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius);
       padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(25, 194, 255, 0.12);
-      color: var(--accent);
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
+      font-size: 0.82rem;
+      font-family: "DM Mono", monospace;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .control:hover { border-color: var(--sky); color: var(--sky); }
+    .control:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 80px;
+      border: 1px solid var(--border);
+    }
+
+    .hero-left {
+      padding: 40px;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      color: var(--mint);
+      border: 1px solid var(--mint);
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
     }
 
     h1 {
-      margin: 16px 0 12px;
-      font-size: clamp(2.2rem, 2.6vw + 1.5rem, 3.8rem);
-      line-height: 1.05;
+      font-size: clamp(2rem, 3vw + 1rem, 3.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--text);
     }
+
+    h1 .accent { color: var(--sky); }
 
     .subtitle {
       color: var(--muted);
-      font-size: 1.05rem;
-      margin-bottom: 24px;
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 440px;
+      margin-bottom: 28px;
+      font-family: "DM Mono", monospace;
+      font-weight: 400;
     }
 
-    .meta {
+    .meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 16px;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.9rem;
-      color: var(--muted);
+      gap: 8px;
+      margin-bottom: 28px;
     }
 
-    .meta span {
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
+    .meta-tag {
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border: 1px solid var(--border-2);
+      color: var(--muted);
+      border-radius: var(--radius);
+      letter-spacing: 0.04em;
     }
 
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
+      gap: 10px;
     }
 
     .btn {
       appearance: none;
       border: none;
       cursor: pointer;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-size: 0.98rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      font-family: "DM Mono", monospace;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
 
     .btn-primary {
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
-      color: #07101d;
-      box-shadow: 0 18px 32px rgba(25, 194, 255, 0.25);
+      background: var(--sky);
+      color: var(--navy);
+      border: 1px solid var(--sky);
     }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 22px 38px rgba(25, 194, 255, 0.35);
-    }
+    .btn-primary:hover { background: var(--mint); border-color: var(--mint); }
 
     .btn-ghost {
       background: transparent;
       color: var(--text);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--border-2);
     }
+    .btn-ghost:hover { border-color: var(--sky); color: var(--sky); }
+    .btn:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
 
-    .btn-ghost:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.4);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    .btn:focus-visible {
-      outline: 2px solid rgba(25, 194, 255, 0.7);
-      outline-offset: 3px;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .control {
-      background: var(--card-strong);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 8px 12px;
-      font-size: 0.9rem;
-      font-family: "IBM Plex Mono", monospace;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .control:hover {
-      border-color: rgba(255, 255, 255, 0.4);
-      transform: translateY(-1px);
-    }
-
-    .control:focus-visible {
-      outline: 2px solid rgba(25, 194, 255, 0.7);
-      outline-offset: 3px;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .hero-right {
-      display: grid;
-      gap: 16px;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
+    /* Stat cells */
     .stat {
-      background: var(--card-strong);
-      border-radius: 16px;
-      padding: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      min-height: 120px;
+      padding: 28px 24px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      gap: 8px;
     }
+    .stat:nth-child(even) { border-right: none; }
+    .stat:nth-child(n+3) { border-bottom: none; }
 
-    .stat:hover {
-      transform: translateY(-4px);
-      border-color: rgba(139, 255, 122, 0.3);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    .stat-label {
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--steel);
     }
 
     .stat h3 {
-      margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--sky);
     }
 
     .stat p {
-      margin: 0;
+      font-family: "DM Mono", monospace;
+      font-size: 0.8rem;
       color: var(--muted);
+      line-height: 1.5;
     }
 
-    section {
-      margin-top: 52px;
+    /* SECTIONS */
+    section { margin-top: 72px; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .section-title {
-      font-size: 1.6rem;
-      margin-bottom: 18px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
+    .section-num {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      color: var(--steel);
+      letter-spacing: 0.1em;
+    }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .timeline-item:first-child { border-top: 1px solid var(--border); }
+    .timeline-item:hover { background: var(--surface); padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
+
+    .timeline-role {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--steel);
+    }
+
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-body {
+      font-family: "DM Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .timeline-link-btn {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      padding: 6px 12px;
+      border: 1px solid var(--border-2);
+      background: transparent;
+      color: var(--muted);
+      border-radius: var(--radius);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .timeline-link-btn:hover { border-color: var(--sky); color: var(--sky); }
+
+    /* CARDS */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
     }
 
     .card {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      min-height: 150px;
+      background: var(--bg);
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: background 0.12s;
+    }
+    .card:hover { background: var(--surface); }
+
+    .card strong {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sky);
     }
 
-    .card:hover {
-      transform: translateY(-6px) scale(1.01);
-      border-color: rgba(25, 194, 255, 0.28);
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.4);
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(350px 140px at 10% 0%, rgba(25, 194, 255, 0.22), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .card:hover::after {
-      opacity: 1;
+    .card p {
+      font-family: "DM Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
     }
 
     .chip-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
+      margin-top: auto;
     }
 
     .chip {
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-family: "DM Mono", monospace;
+      font-size: 0.73rem;
+      padding: 4px 9px;
+      border: 1px solid var(--border-2);
       color: var(--muted);
-      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      border-radius: var(--radius);
+      letter-spacing: 0.03em;
+      transition: border-color 0.12s, color 0.12s;
     }
+    .chip:hover { border-color: var(--sky); color: var(--sky); }
 
-    .chip:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.4);
-      color: var(--text);
-    }
-
-    .timeline {
-      display: grid;
-      gap: 12px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 16px;
-      padding: 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 14, 28, 0.5);
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-      align-items: center;
-    }
-
-    .timeline-item:hover {
-      transform: translateX(6px);
-      border-color: rgba(255, 184, 77, 0.4);
-      background: rgba(8, 14, 28, 0.7);
-    }
-
-    .timeline-link {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: transparent;
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .timeline-item.has-link .timeline-link {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .timeline-link:hover {
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .timeline-item span {
-      font-family: "IBM Plex Mono", monospace;
-      color: var(--accent-3);
-      font-size: 0.85rem;
+    /* MARQUEE */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      overflow: hidden;
     }
 
     .marquee {
       display: flex;
-      gap: 16px;
-      overflow: hidden;
-      mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+      gap: 0;
+      mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
     }
 
     .marquee-track {
       display: flex;
-      gap: 16px;
-      animation: scroll 18s linear infinite;
+      gap: 0;
+      animation: scroll 22s linear infinite;
+      flex-shrink: 0;
     }
 
-    .marquee:hover .marquee-track {
-      animation-play-state: paused;
-    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
 
     .marquee span {
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--steel);
+      padding: 0 24px;
+      border-right: 1px solid var(--border);
       white-space: nowrap;
-      font-size: 0.9rem;
+      transition: color 0.12s;
+    }
+    .marquee span:hover { color: var(--sky); }
+
+    @keyframes scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
+    /* FOOTER */
     footer {
-      margin-top: 64px;
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
-      color: var(--muted);
-      font-size: 0.9rem;
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--steel);
+      letter-spacing: 0.04em;
     }
 
+    /* TOAST */
     .toast {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: rgba(8, 12, 24, 0.9);
+      background: var(--surface);
       color: var(--text);
       padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: var(--shadow);
-      transform: translateY(20px);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      font-family: "DM Mono", monospace;
+      font-size: 0.82rem;
+      transform: translateY(12px);
       opacity: 0;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 10;
+      transition: opacity 0.18s, transform 0.18s;
+      z-index: 100;
       pointer-events: none;
     }
+    .toast.show { opacity: 1; transform: translateY(0); }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
+    /* RESPONSIVE */
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-right { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(even) { border-right: none; }
+      .stat:nth-child(odd)  { border-right: 1px solid var(--border); }
+      .stat:nth-last-child(-n+2) { border-bottom: none; }
+      header { flex-direction: column; align-items: flex-start; }
     }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @media (max-width: 900px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .stat-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 540px) {
+      .hero-right { grid-template-columns: 1fr; }
+      .stat { border-right: none !important; }
+      .timeline-item { grid-template-columns: 80px 1fr; }
+      .timeline-link-btn { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="grain"></div>
   <div class="container">
     <header>
-      <div class="logo">
-        <span>super_man2775</span> · <span data-i18n="logo">portfolio</span>
-      </div>
+      <div class="logo">super_man2775 <em>/ <span data-i18n="logo">portfolio</span></em></div>
       <nav>
-        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#work"       data-i18n="nav.work">Work</a>
         <a href="#extensions" data-i18n="nav.extensions">Extensions</a>
-        <a href="#skills" data-i18n="nav.skills">Skills</a>
-        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <a href="#skills"     data-i18n="nav.skills">Skills</a>
+        <a href="#contact"    data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="controls">
         <label class="sr-only" for="langSelect" data-i18n="label.language">Language</label>
@@ -547,96 +512,106 @@
           <option value="de-AT">Deutsch</option>
           <option value="fr">Français</option>
         </select>
-        <button class="control" id="themeToggle" type="button">Theme</button>
+        <button class="control" id="themeToggle" type="button">Light</button>
       </div>
     </header>
 
     <section class="hero">
-      <div class="hero-card">
-        <div class="tag" data-i18n="tagline">Teen Builder · Belgium</div>
-        <h1 data-i18n="hero.title">Hi there, I'm super_man2775!</h1>
+      <div class="hero-left">
+        <div class="badge" data-i18n="tagline">Teen Builder · Belgium</div>
+        <h1>Hi, I'm <span class="accent">super_man2775</span></h1>
         <p class="subtitle" data-i18n="hero.subtitle">
           15-year-old developer from Belgium focused on practical extensions, smooth UX, and learning fast by shipping.
         </p>
-        <div class="meta">
-          <span data-i18n="meta.location">Location: Belgium</span>
-          <span data-i18n="meta.age">Age: 15</span>
+        <div class="meta-row">
+          <span class="meta-tag" data-i18n="meta.location">Location: Belgium</span>
+          <span class="meta-tag" data-i18n="meta.age">Age: 15</span>
         </div>
         <div class="cta-row" id="contact">
           <button class="btn btn-primary" id="discordBtn" data-i18n="cta.discord">Contact on Discord</button>
           <a class="btn btn-ghost" id="discordLink" href="https://discord.com/users/1349389611402662021" target="_blank" rel="noreferrer" data-i18n="cta.openDiscord">Open Discord</a>
-          <a class="btn btn-ghost" href="https://github.com/superman2775" target="_blank" rel="noreferrer" data-i18n="cta.github">More on GitHub</a>
+          <a class="btn btn-ghost" href="https://github.com/superman2775" target="_blank" rel="noreferrer" data-i18n="cta.github">GitHub</a>
         </div>
       </div>
+
       <div class="hero-right">
-        <div class="stat-grid">
-          <div class="stat">
-            <h3 data-i18n="stats.extensions.title">Extensions</h3>
-            <p data-i18n="stats.extensions.body">Smartschool Assistant, Games, Results Leaderboard</p>
-          </div>
-          <div class="stat">
-            <h3 data-i18n="stats.itlearn.title">IT Learn</h3>
-            <p data-i18n="stats.itlearn.body">Learn programming for free, with interactive lessons.</p>
-          </div>
-          <div class="stat">
-            <h3 data-i18n="stats.focus.title">Focus</h3>
-            <p data-i18n="stats.focus.body">Education tech, usability, and performance</p>
-          </div>
-          <div class="stat">
-            <h3 data-i18n="stats.users.title">300+ users</h3>
-            <p data-i18n="stats.users.body">Active users across all extensions and platforms</p>
-          </div>
+        <div class="stat">
+          <span class="stat-label">Projects</span>
+          <h3 data-i18n="stats.extensions.title">Extensions</h3>
+          <p data-i18n="stats.extensions.body">Smartschool Assistant, Games, Results Leaderboard</p>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Platform</span>
+          <h3 data-i18n="stats.itlearn.title">IT Learn</h3>
+          <p data-i18n="stats.itlearn.body">Learn programming for free, with interactive lessons.</p>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Domain</span>
+          <h3 data-i18n="stats.focus.title">Focus</h3>
+          <p data-i18n="stats.focus.body">Education tech, usability, and performance</p>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Reach</span>
+          <h3 data-i18n="stats.users.title">300+ users</h3>
+          <p data-i18n="stats.users.body">Active users across all extensions and platforms</p>
         </div>
       </div>
     </section>
+
     <section id="work">
-      <h2 class="section-title" data-i18n="work.title">Main Accomplishments</h2>
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title" data-i18n="work.title">Main Accomplishments</h2>
+      </div>
       <div class="timeline">
         <div class="timeline-item" data-link="https://itlearn.be/">
-          <span data-i18n="work.itlearn.role">Lead Dev</span>
+          <span class="timeline-role" data-i18n="work.itlearn.role">Lead Dev</span>
           <div>
-            <strong>IT Learn</strong>
-            <p data-i18n="work.itlearn.body">Build programming courses about HTML, CSS, GitHub, and other contributions.</p>
+            <div class="timeline-title">IT Learn</div>
+            <div class="timeline-body" data-i18n="work.itlearn.body">Build programming courses about HTML, CSS, GitHub, and other contributions.</div>
           </div>
-          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
+          <button class="timeline-link-btn" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-GPT/">
-          <span data-i18n="work.extensionRole">Extension</span>
+          <span class="timeline-role" data-i18n="work.extensionRole">Extension</span>
           <div>
-            <strong>Smartschool AI Assistant</strong>
-            <p data-i18n="work.assistant.body">Ask your questions to an AI inside of Smartschool.</p>
+            <div class="timeline-title">Smartschool AI Assistant</div>
+            <div class="timeline-body" data-i18n="work.assistant.body">Ask your questions to an AI inside of Smartschool.</div>
           </div>
-          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
+          <button class="timeline-link-btn" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-Games/">
-          <span data-i18n="work.extensionRole">Extension</span>
+          <span class="timeline-role" data-i18n="work.extensionRole">Extension</span>
           <div>
-            <strong>Smartschool Games</strong>
-            <p data-i18n="work.games.body">Play 6 different games in Smartschool.</p>
+            <div class="timeline-title">Smartschool Games</div>
+            <div class="timeline-body" data-i18n="work.games.body">Play 6 different games in Smartschool.</div>
           </div>
-          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
+          <button class="timeline-link-btn" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/smartschool-results-leaderboard/">
-          <span data-i18n="work.extensionRole">Extension</span>
+          <span class="timeline-role" data-i18n="work.extensionRole">Extension</span>
           <div>
-            <strong>Smartschool Results Leaderboard</strong>
-            <p data-i18n="work.results.body">Try to become the best student with an engaging leaderboard.</p>
+            <div class="timeline-title">Smartschool Results Leaderboard</div>
+            <div class="timeline-body" data-i18n="work.results.body">Try to become the best student with an engaging leaderboard.</div>
           </div>
-          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
+          <button class="timeline-link-btn" type="button" data-i18n="cta.open">Open</button>
         </div>
         <div class="timeline-item" data-link="https://github.com/superman2775/Smartschool-Achievements/">
-          <span data-i18n="work.extensionRole">Extension</span>
+          <span class="timeline-role" data-i18n="work.extensionRole">Extension</span>
           <div>
-            <strong>[NEW] Smartschool Achievements</strong>
-            <p data-i18n="work.achievements.body">Earn badges and unlock rewards while studying. With built-in leaderboard.</p>
+            <div class="timeline-title">Smartschool Achievements <span style="font-size:0.75rem;color:var(--mint);font-family:'DM Mono',monospace;font-weight:400;">NEW</span></div>
+            <div class="timeline-body" data-i18n="work.achievements.body">Earn badges and unlock rewards while studying. With built-in leaderboard.</div>
           </div>
-          <button class="timeline-link" type="button" data-i18n="cta.open">Open</button>
+          <button class="timeline-link-btn" type="button" data-i18n="cta.open">Open</button>
         </div>
       </div>
     </section>
 
     <section id="extensions">
-      <h2 class="section-title" data-i18n="extensions.title">Extension Lab</h2>
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title" data-i18n="extensions.title">Extension Lab</h2>
+      </div>
       <div class="grid">
         <div class="card">
           <strong data-i18n="extensions.assistant.title">Assistant</strong>
@@ -669,38 +644,43 @@
     </section>
 
     <section id="skills">
-      <h2 class="section-title" data-i18n="skills.title">Skills + Stack</h2>
-      <div class="marquee">
-        <div class="marquee-track">
-          <span data-i18n="skills.marquee.javascript">JavaScript</span>
-          <span data-i18n="skills.marquee.python">Python</span>
-          <span data-i18n="skills.marquee.frontend">Frontend</span>
-          <span data-i18n="skills.marquee.extensions">Browser Extensions</span>
-          <span data-i18n="skills.marquee.uiux">UI/UX</span>
-          <span data-i18n="skills.marquee.designSystems">Design Systems</span>
-          <span data-i18n="skills.marquee.automation">Automation</span>
-          <span data-i18n="skills.marquee.performance">Performance</span>
-          <span data-i18n="skills.marquee.smartschoolApis">Smartschool APIs</span>
-          <span data-i18n="skills.marquee.ai">AI</span>
-          <span data-i18n="skills.marquee.rapid">Rapid Prototyping</span>
-          <span data-i18n="skills.marquee.playful">Playful Interaction</span>
-        </div>
-        <div class="marquee-track">
-          <span data-i18n="skills.marquee.javascript">JavaScript</span>
-          <span data-i18n="skills.marquee.python">Python</span>
-          <span data-i18n="skills.marquee.frontend">Frontend</span>
-          <span data-i18n="skills.marquee.extensions">Browser Extensions</span>
-          <span data-i18n="skills.marquee.uiux">UI/UX</span>
-          <span data-i18n="skills.marquee.designSystems">Design Systems</span>
-          <span data-i18n="skills.marquee.automation">Automation</span>
-          <span data-i18n="skills.marquee.performance">Performance</span>
-          <span data-i18n="skills.marquee.smartschoolApis">Smartschool APIs</span>
-          <span data-i18n="skills.marquee.ai">AI</span>
-          <span data-i18n="skills.marquee.rapid">Rapid Prototyping</span>
-          <span data-i18n="skills.marquee.playful">Playful Interaction</span>
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title" data-i18n="skills.title">Skills + Stack</h2>
+      </div>
+      <div class="marquee-wrap">
+        <div class="marquee">
+          <div class="marquee-track">
+            <span data-i18n="skills.marquee.javascript">JavaScript</span>
+            <span data-i18n="skills.marquee.python">Python</span>
+            <span data-i18n="skills.marquee.frontend">Frontend</span>
+            <span data-i18n="skills.marquee.extensions">Browser Extensions</span>
+            <span data-i18n="skills.marquee.uiux">UI / UX</span>
+            <span data-i18n="skills.marquee.designSystems">Design Systems</span>
+            <span data-i18n="skills.marquee.automation">Automation</span>
+            <span data-i18n="skills.marquee.performance">Performance</span>
+            <span data-i18n="skills.marquee.smartschoolApis">Smartschool APIs</span>
+            <span data-i18n="skills.marquee.ai">AI</span>
+            <span data-i18n="skills.marquee.rapid">Rapid Prototyping</span>
+            <span data-i18n="skills.marquee.playful">Playful Interaction</span>
+          </div>
+          <div class="marquee-track" aria-hidden="true">
+            <span data-i18n="skills.marquee.javascript">JavaScript</span>
+            <span data-i18n="skills.marquee.python">Python</span>
+            <span data-i18n="skills.marquee.frontend">Frontend</span>
+            <span data-i18n="skills.marquee.extensions">Browser Extensions</span>
+            <span data-i18n="skills.marquee.uiux">UI / UX</span>
+            <span data-i18n="skills.marquee.designSystems">Design Systems</span>
+            <span data-i18n="skills.marquee.automation">Automation</span>
+            <span data-i18n="skills.marquee.performance">Performance</span>
+            <span data-i18n="skills.marquee.smartschoolApis">Smartschool APIs</span>
+            <span data-i18n="skills.marquee.ai">AI</span>
+            <span data-i18n="skills.marquee.rapid">Rapid Prototyping</span>
+            <span data-i18n="skills.marquee.playful">Playful Interaction</span>
+          </div>
         </div>
       </div>
-      <div class="grid" style="margin-top: 18px;">
+      <div class="grid" style="margin-top: 1px;">
         <div class="card">
           <strong data-i18n="skills.cards.build.title">What I build</strong>
           <p data-i18n="skills.cards.build.body">Student-first tooling that removes friction and adds a little fun.</p>
@@ -737,33 +717,30 @@
     </footer>
   </div>
 
-  <div class="toast" id="toast">Discord handle copied: super_man2775</div>
+  <div class="toast" id="toast"></div>
 
   <script>
-    const yearEl = document.getElementById("year");
-    yearEl.textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
     const translations = {
       en: {
         title: "super_man2775 | Portfolio",
-        description: "Portfolio of super_man2775 — teen builder from Belgium, extension creator, and lead dev.",
+        description: "Portfolio of super_man2775, teen builder from Belgium, extension creator, and lead dev.",
         logo: "portfolio",
         "label.language": "Language",
-        "label.theme": "Theme",
-        "theme.light": "Light mode",
-        "theme.dark": "Dark mode",
+        "theme.light": "Light",
+        "theme.dark": "Dark",
         "nav.work": "Work",
         "nav.extensions": "Extensions",
         "nav.skills": "Skills",
         "nav.contact": "Contact",
         tagline: "Teen Builder · Belgium",
-        "hero.title": "Hi there, I'm super_man2775!",
         "hero.subtitle": "15-year-old developer from Belgium focused on practical extensions, smooth UX, and learning fast by shipping.",
         "meta.location": "Location: Belgium",
         "meta.age": "Age: 15",
         "cta.discord": "Contact on Discord",
         "cta.openDiscord": "Open Discord",
-        "cta.github": "More on GitHub",
+        "cta.github": "GitHub",
         "cta.open": "Open",
         "stats.extensions.title": "Extensions",
         "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
@@ -771,7 +748,7 @@
         "stats.itlearn.body": "Learn programming for free, with interactive lessons.",
         "stats.focus.title": "Focus",
         "stats.focus.body": "Education tech, usability, and performance",
-        "stats.users.title": "200+ users",
+        "stats.users.title": "300+ users",
         "stats.users.body": "Active users across all extensions and platforms",
         "work.title": "Main Accomplishments",
         "work.itlearn.role": "Lead Dev",
@@ -793,7 +770,7 @@
         "skills.marquee.python": "Python",
         "skills.marquee.frontend": "Frontend",
         "skills.marquee.extensions": "Browser Extensions",
-        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.uiux": "UI / UX",
         "skills.marquee.designSystems": "Design Systems",
         "skills.marquee.automation": "Automation",
         "skills.marquee.performance": "Performance",
@@ -831,24 +808,22 @@
       },
       nl: {
         title: "super_man2775 | Portfolio",
-        description: "Portfolio van super_man2775 — tienerbouwer uit België, extensiemaker en lead dev.",
+        description: "Portfolio van super_man2775, tienerbouwer uit België, extensiemaker en lead dev.",
         logo: "portfolio",
         "label.language": "Taal",
-        "label.theme": "Thema",
-        "theme.light": "Lichte modus",
-        "theme.dark": "Donkere modus",
+        "theme.light": "Licht",
+        "theme.dark": "Donker",
         "nav.work": "Werk",
         "nav.extensions": "Extensies",
         "nav.skills": "Skills",
         "nav.contact": "Contact",
         tagline: "Tienerbouwer · België",
-        "hero.title": "Hoi, ik ben super_man2775!",
         "hero.subtitle": "15-jarige ontwikkelaar uit België, gericht op praktische extensies, soepele UX en snel leren door te shippen.",
         "meta.location": "Locatie: België",
         "meta.age": "Leeftijd: 15",
         "cta.discord": "Contact op Discord",
         "cta.openDiscord": "Open Discord",
-        "cta.github": "Meer op GitHub",
+        "cta.github": "GitHub",
         "cta.open": "Open",
         "stats.extensions.title": "Extensies",
         "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
@@ -856,7 +831,7 @@
         "stats.itlearn.body": "Leer gratis programmeren met interactieve lessen.",
         "stats.focus.title": "Focus",
         "stats.focus.body": "Edtech, usability en performance",
-        "stats.users.title": "200+ gebruikers",
+        "stats.users.title": "300+ gebruikers",
         "stats.users.body": "Actieve gebruikers over alle extensies en platformen",
         "work.title": "Belangrijkste prestaties",
         "work.itlearn.role": "Lead Dev",
@@ -872,13 +847,13 @@
         "extensions.games.title": "Games",
         "extensions.games.body": "Multiplayergames om studeren leuker te maken.",
         "extensions.results.title": "Resultaten Leaderboard",
-        "extensions.results.body": "Volg je voortgang en competitief met een leuke leaderboard.",
+        "extensions.results.body": "Volg je voortgang en compete met een leuke leaderboard.",
         "skills.title": "Skills + Stack",
         "skills.marquee.javascript": "JavaScript",
         "skills.marquee.python": "Python",
         "skills.marquee.frontend": "Frontend",
         "skills.marquee.extensions": "Browserextensies",
-        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.uiux": "UI / UX",
         "skills.marquee.designSystems": "Designsystemen",
         "skills.marquee.automation": "Automatisering",
         "skills.marquee.performance": "Performance",
@@ -916,44 +891,42 @@
       },
       "de-AT": {
         title: "super_man2775 | Portfolio",
-        description: "Portfolio von super_man2775 — Teen-Builder aus Belgien, Extension-Creator und Lead Dev.",
+        description: "Portfolio von super_man2775, Teen-Builder aus Belgien, Extension-Creator und Lead Dev.",
         logo: "Portfolio",
         "label.language": "Sprache",
-        "label.theme": "Design",
-        "theme.light": "Heller Modus",
-        "theme.dark": "Dunkler Modus",
+        "theme.light": "Hell",
+        "theme.dark": "Dunkel",
         "nav.work": "Arbeit",
         "nav.extensions": "Extensions",
         "nav.skills": "Skills",
         "nav.contact": "Kontakt",
         tagline: "Teen-Builder · Belgien",
-        "hero.title": "Hi, ich bin super_man2775!",
-        "hero.subtitle": "15-jähriger Entwickler aus Belgien mit Fokus auf praktische Extensions, smoothes UX und schnelles Lernen durch Shippen.",
+        "hero.subtitle": "15-jaehriger Entwickler aus Belgien mit Fokus auf praktische Extensions, smoothes UX und schnelles Lernen durch Shippen.",
         "meta.location": "Standort: Belgien",
         "meta.age": "Alter: 15",
         "cta.discord": "Kontakt auf Discord",
-        "cta.openDiscord": "Discord öffnen",
-        "cta.github": "Mehr auf GitHub",
-        "cta.open": "Öffnen",
+        "cta.openDiscord": "Discord oeffnen",
+        "cta.github": "GitHub",
+        "cta.open": "Oeffnen",
         "stats.extensions.title": "Extensions",
         "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
         "stats.itlearn.title": "IT Learn",
         "stats.itlearn.body": "Programmieren kostenlos lernen, mit interaktiven Lektionen.",
         "stats.focus.title": "Fokus",
         "stats.focus.body": "EdTech, Usability und Performance",
-        "stats.users.title": "200+ Nutzer",
-        "stats.users.body": "Aktive Nutzer über alle Extensions und Plattformen",
+        "stats.users.title": "300+ Nutzer",
+        "stats.users.body": "Aktive Nutzer ueber alle Extensions und Plattformen",
         "work.title": "Wichtigste Erfolge",
         "work.itlearn.role": "Lead Dev",
         "work.itlearn.body": "Programmierkurse zu HTML, CSS, GitHub und mehr erstellen.",
         "work.extensionRole": "Extension",
         "work.assistant.body": "Stell deine Fragen an eine KI in Smartschool.",
         "work.games.body": "Spiele 6 verschiedene Games in Smartschool.",
-        "work.results.body": "Werde mit einem packenden Leaderboard der beste Schüler.",
+        "work.results.body": "Werde mit einem packenden Leaderboard der beste Schueler.",
         "work.achievements.body": "Verdiene Badges und schalte Rewards frei. Mit integriertem Leaderboard.",
         "extensions.title": "Extension Lab",
         "extensions.assistant.title": "Assistant",
-        "extensions.assistant.body": "KI-gestützte Hilfe in Smartschool für Antworten und Guidance.",
+        "extensions.assistant.body": "KI-gestuetzte Hilfe in Smartschool fuer Antworten und Guidance.",
         "extensions.games.title": "Games",
         "extensions.games.body": "Multiplayer-Games, die Lernen spannender machen.",
         "extensions.results.title": "Results Leaderboard",
@@ -963,7 +936,7 @@
         "skills.marquee.python": "Python",
         "skills.marquee.frontend": "Frontend",
         "skills.marquee.extensions": "Browser-Extensions",
-        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.uiux": "UI / UX",
         "skills.marquee.designSystems": "Design-Systeme",
         "skills.marquee.automation": "Automatisierung",
         "skills.marquee.performance": "Performance",
@@ -972,12 +945,12 @@
         "skills.marquee.rapid": "Rapid Prototyping",
         "skills.marquee.playful": "Spielerische Interaktion",
         "skills.cards.build.title": "Was ich baue",
-        "skills.cards.build.body": "Student-first Tools, die Reibung entfernen und Spaß hinzufügen.",
+        "skills.cards.build.body": "Student-first Tools, die Reibung entfernen und Spass hinzufuegen.",
         "skills.cards.work.title": "Wie ich arbeite",
-        "skills.cards.work.body": "Schnelle Iteration, Feedback-Loops und wöchentlich shippen.",
+        "skills.cards.work.body": "Schnelle Iteration, Feedback-Loops und woechentlich shippen.",
         "skills.cards.explore.title": "Aktuell am Erkunden",
-        "skills.cards.explore.body": "KI-Helfer für Lernpläne und smartere Fortschritts-Insights.",
-        "footer.tagline": "Gebaut für Studierende, von einem Studierenden",
+        "skills.cards.explore.body": "KI-Helfer fuer Lernplaene und smartere Fortschritts-Insights.",
+        "footer.tagline": "Gebaut fuer Studierende, von einem Studierenden",
         "chips.aiIntegration": "KI-Integration",
         "chips.api": "API",
         "chips.aiModels": "KI-Modelle",
@@ -1001,54 +974,52 @@
       },
       fr: {
         title: "super_man2775 | Portfolio",
-        description: "Portfolio de super_man2775 — teen builder belge, créateur d’extensions et lead dev.",
+        description: "Portfolio de super_man2775, teen builder belge, createur d'extensions et lead dev.",
         logo: "portfolio",
         "label.language": "Langue",
-        "label.theme": "Thème",
-        "theme.light": "Mode clair",
-        "theme.dark": "Mode sombre",
+        "theme.light": "Clair",
+        "theme.dark": "Sombre",
         "nav.work": "Travaux",
         "nav.extensions": "Extensions",
-        "nav.skills": "Compétences",
+        "nav.skills": "Competences",
         "nav.contact": "Contact",
         tagline: "Teen builder · Belgique",
-        "hero.title": "Salut, je suis super_man2775 !",
-        "hero.subtitle": "Développeur de 15 ans en Belgique, axé sur des extensions pratiques, une UX fluide et l’apprentissage rapide en livrant.",
+        "hero.subtitle": "Developpeur de 15 ans en Belgique, axe sur des extensions pratiques, une UX fluide et l'apprentissage rapide en livrant.",
         "meta.location": "Lieu : Belgique",
-        "meta.age": "Âge : 15",
+        "meta.age": "Age : 15",
         "cta.discord": "Contacter sur Discord",
         "cta.openDiscord": "Ouvrir Discord",
-        "cta.github": "Plus sur GitHub",
+        "cta.github": "GitHub",
         "cta.open": "Ouvrir",
         "stats.extensions.title": "Extensions",
         "stats.extensions.body": "Smartschool Assistant, Games, Results Leaderboard",
         "stats.itlearn.title": "IT Learn",
-        "stats.itlearn.body": "Apprendre à coder gratuitement avec des leçons interactives.",
+        "stats.itlearn.body": "Apprendre a coder gratuitement avec des lecons interactives.",
         "stats.focus.title": "Focus",
         "stats.focus.body": "EdTech, ergonomie et performance",
-        "stats.users.title": "200+ utilisateurs",
+        "stats.users.title": "300+ utilisateurs",
         "stats.users.body": "Utilisateurs actifs sur toutes les extensions et plateformes",
-        "work.title": "Principales réalisations",
+        "work.title": "Principales realisations",
         "work.itlearn.role": "Lead Dev",
-        "work.itlearn.body": "Créer des cours sur HTML, CSS, GitHub et plus encore.",
+        "work.itlearn.body": "Creer des cours sur HTML, CSS, GitHub et plus encore.",
         "work.extensionRole": "Extension",
-        "work.assistant.body": "Posez vos questions à une IA dans Smartschool.",
-        "work.games.body": "Jouez à 6 jeux différents dans Smartschool.",
-        "work.results.body": "Devenez le meilleur élève avec un leaderboard engageant.",
-        "work.achievements.body": "Gagnez des badges et débloquez des récompenses. Avec leaderboard intégré.",
+        "work.assistant.body": "Posez vos questions a une IA dans Smartschool.",
+        "work.games.body": "Jouez a 6 jeux differents dans Smartschool.",
+        "work.results.body": "Devenez le meilleur eleve avec un leaderboard engageant.",
+        "work.achievements.body": "Gagnez des badges et debloquez des recompenses. Avec leaderboard integre.",
         "extensions.title": "Extension Lab",
         "extensions.assistant.title": "Assistant",
-        "extensions.assistant.body": "Aide propulsée par l’IA dans Smartschool pour répondre et guider.",
+        "extensions.assistant.body": "Aide propulsee par l'IA dans Smartschool pour repondre et guider.",
         "extensions.games.title": "Jeux",
-        "extensions.games.body": "Jeux multijoueurs pour rendre l’étude plus fun.",
+        "extensions.games.body": "Jeux multijoueurs pour rendre l'etude plus fun.",
         "extensions.results.title": "Results Leaderboard",
-        "extensions.results.body": "Suivez vos progrès et rivalisez avec vos pairs.",
-        "skills.title": "Compétences + Stack",
+        "extensions.results.body": "Suivez vos progres et rivalisez avec vos pairs.",
+        "skills.title": "Competences + Stack",
         "skills.marquee.javascript": "JavaScript",
         "skills.marquee.python": "Python",
         "skills.marquee.frontend": "Frontend",
         "skills.marquee.extensions": "Extensions navigateur",
-        "skills.marquee.uiux": "UI/UX",
+        "skills.marquee.uiux": "UI / UX",
         "skills.marquee.designSystems": "Design systems",
         "skills.marquee.automation": "Automatisation",
         "skills.marquee.performance": "Performance",
@@ -1057,138 +1028,103 @@
         "skills.marquee.rapid": "Prototypage rapide",
         "skills.marquee.playful": "Interaction ludique",
         "skills.cards.build.title": "Ce que je construis",
-        "skills.cards.build.body": "Des outils student-first qui réduisent la friction et ajoutent du fun.",
-        "skills.cards.work.title": "Ma façon de travailler",
-        "skills.cards.work.body": "Itération rapide, boucles de feedback et livraisons hebdo.",
+        "skills.cards.build.body": "Des outils student-first qui reduisent la friction et ajoutent du fun.",
+        "skills.cards.work.title": "Ma facon de travailler",
+        "skills.cards.work.body": "Iteration rapide, boucles de feedback et livraisons hebdo.",
         "skills.cards.explore.title": "En exploration",
-        "skills.cards.explore.body": "Des assistants IA pour les plans d’étude et des insights plus malins.",
-        "footer.tagline": "Conçu pour les étudiants, par un étudiant",
-        "chips.aiIntegration": "Intégration IA",
+        "skills.cards.explore.body": "Des assistants IA pour les plans d'etude et des insights plus malins.",
+        "footer.tagline": "Concu pour les etudiants, par un etudiant",
+        "chips.aiIntegration": "Integration IA",
         "chips.api": "API",
-        "chips.aiModels": "Modèles IA",
+        "chips.aiModels": "Modeles IA",
         "chips.iframe": "iFrame",
         "chips.multiplayer": "Multijoueur",
         "chips.motivation": "Motivation",
         "chips.analytics": "Analytics",
         "chips.rankingUi": "Ranking UI",
-        "chips.community": "Communauté",
+        "chips.community": "Communaute",
         "chips.chromeExtensions": "Extensions Chrome",
         "chips.dashboards": "Tableaux de bord",
         "chips.widgets": "Widgets",
-        "chips.productThinking": "Pensée produit",
+        "chips.productThinking": "Pensee produit",
         "chips.agile": "Agile",
         "chips.collaboration": "Collaboration",
         "chips.personalization": "Personnalisation",
         "chips.dataViz": "Data viz",
         "chips.automation": "Automatisation",
-        "toast.copied": "Pseudo Discord copié",
+        "toast.copied": "Pseudo Discord copie",
         "toast.handle": "Pseudo Discord"
       }
     };
 
-    const i18nElements = Array.from(document.querySelectorAll("[data-i18n]"));
+    const i18nEls = Array.from(document.querySelectorAll("[data-i18n]"));
     const langSelect = document.getElementById("langSelect");
     const themeToggle = document.getElementById("themeToggle");
-    const metaDescription = document.getElementById("metaDescription");
     const root = document.documentElement;
 
     const applyTranslations = (lang) => {
-      const dictionary = translations[lang] || translations.en;
-      i18nElements.forEach((el) => {
+      const d = translations[lang] || translations.en;
+      i18nEls.forEach(el => {
         const key = el.dataset.i18n;
-        if (dictionary[key]) {
-          el.textContent = dictionary[key];
-        }
+        if (d[key]) el.textContent = d[key];
       });
-      document.title = dictionary.title || translations.en.title;
-      if (metaDescription) {
-        metaDescription.setAttribute("content", dictionary.description || translations.en.description);
-      }
-      themeToggle.textContent = root.dataset.theme === "light" ? dictionary["theme.dark"] : dictionary["theme.light"];
-      langSelect.setAttribute("aria-label", dictionary["label.language"]);
+      document.title = d.title || translations.en.title;
+      document.getElementById("metaDescription").setAttribute("content", d.description || "");
       root.setAttribute("lang", lang);
+      themeToggle.textContent = root.dataset.theme === "light" ? d["theme.dark"] : d["theme.light"];
     };
 
-    const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
-    const savedTheme = localStorage.getItem("theme") || (prefersLight ? "light" : "dark");
+    const savedTheme = localStorage.getItem("theme") ||
+      (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
     root.dataset.theme = savedTheme;
-
-    const updateThemeLabel = (lang) => {
-      const dictionary = translations[lang] || translations.en;
-      themeToggle.textContent = root.dataset.theme === "light" ? dictionary["theme.dark"] : dictionary["theme.light"];
-    };
 
     themeToggle.addEventListener("click", () => {
       root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
       localStorage.setItem("theme", root.dataset.theme);
-      updateThemeLabel(langSelect.value);
+      const d = translations[langSelect.value] || translations.en;
+      themeToggle.textContent = root.dataset.theme === "light" ? d["theme.dark"] : d["theme.light"];
     });
 
     const savedLang = localStorage.getItem("lang") || "en";
     langSelect.value = translations[savedLang] ? savedLang : "en";
     applyTranslations(langSelect.value);
 
-    langSelect.addEventListener("change", (event) => {
-      const lang = event.target.value;
-      localStorage.setItem("lang", lang);
-      applyTranslations(lang);
+    langSelect.addEventListener("change", e => {
+      localStorage.setItem("lang", e.target.value);
+      applyTranslations(e.target.value);
     });
 
     const toast = document.getElementById("toast");
-    const showToast = (message) => {
-      toast.textContent = message;
+    const showToast = msg => {
+      toast.textContent = msg;
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 2200);
     };
 
     const discordHandle = "super_man2775";
-    const discordUserId = "1349389611402662021";
-    const discordLinkEl = document.getElementById("discordLink");
-    if (discordUserId) {
-      discordLinkEl.href = `https://discord.com/users/${discordUserId}`;
-    } else {
-      discordLinkEl.style.display = "none";
-    }
+    document.getElementById("discordLink").href = "https://discord.com/users/1349389611402662021";
     document.getElementById("discordBtn").addEventListener("click", async () => {
-      const dictionary = translations[langSelect.value] || translations.en;
+      const d = translations[langSelect.value] || translations.en;
       try {
         await navigator.clipboard.writeText(discordHandle);
-        showToast(`${dictionary["toast.copied"]}: ${discordHandle}`);
+        showToast(`${d["toast.copied"]}: ${discordHandle}`);
       } catch {
-        showToast(`${dictionary["toast.handle"]}: ${discordHandle}`);
+        showToast(`${d["toast.handle"]}: ${discordHandle}`);
       }
     });
 
-    document.querySelectorAll(".timeline-item").forEach((item) => {
+    document.querySelectorAll(".timeline-item").forEach(item => {
       const link = (item.dataset.link || "").trim();
-      const btn = item.querySelector(".timeline-link");
-      if (!link) {
-        if (btn) {
-          btn.style.display = "none";
-        }
-        return;
-      }
-
-      const openLink = () => window.open(link, "_blank", "noreferrer");
-      item.classList.add("has-link");
-      item.tabIndex = 0;
-      item.setAttribute("role", "link");
-      item.setAttribute("aria-label", `Open link for ${item.querySelector("strong")?.textContent || "item"}`);
-
-      item.addEventListener("click", openLink);
-      item.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          openLink();
-        }
+      if (!link) return;
+      const open = () => window.open(link, "_blank", "noreferrer");
+      item.style.cursor = "pointer";
+      item.addEventListener("click", open);
+      item.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
       });
-
-      if (btn) {
-        btn.addEventListener("click", (event) => {
-          event.stopPropagation();
-          openLink();
-        });
-      }
+      item.tabIndex = 0;
+      const btn = item.querySelector(".timeline-link-btn");
+      if (btn) btn.addEventListener("click", e => { e.stopPropagation(); open(); });
     });
   </script>
 </body>
