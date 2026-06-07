@@ -1,319 +1,545 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>super_man2775 | Portfolio</title>
-  <meta name="description" content="Portfolio of super_man2775, teen builder from Belgium, extension creator and lead dev." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --navy:   #093C5D;
-      --steel:  #3B7597;
-      --sky:    #6FD1D7;
-      --mint:   #5DF8D8;
-      --bg:     #07131d;
-      --bg-r:   #0c1e2c;
-      --surf:   #0f2537;
-      --bdr:    #163348;
-      --bdhi:   #254f6b;
-      --text:   #d8eaf4;
-      --sub:    #7bacc5;
-      --dim:    #3d6a85;
-    }
-    [data-theme="light"] {
-      --bg:   #eef5fa; --bg-r: #ffffff; --surf: #ffffff;
-      --bdr:  #c3dae8; --bdhi: #3B7597;
-      --text: #06202f; --sub:  #3B7597;  --dim:  #8bb5cc;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: auto; }
-    body {
-      font-family: "Syne", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>super_man2775 | Portfolio</title>
+<meta name="description" content="Portfolio of super_man2775, teen builder from Belgium, extension creator and lead dev."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ── Design tokens ───────────────────────────── */
+:root {
+  --navy:  #093C5D;
+  --steel: #3B7597;
+  --sky:   #6FD1D7;
+  --mint:  #5DF8D8;
 
-    /* ── Canvas layer ───────────────────────────────────────── */
-    #c {
-      position: fixed;
-      inset: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
+  --bg:    #06111a;
+  --text:  #d4e9f5;
+  --sub:   #6b9bb8;
+  --dim:   #2e5872;
 
-    /* ── Progress bar ───────────────────────────────────────── */
-    #progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      width: 0%;
-      background: var(--sky);
-      z-index: 300;
-      transition: width 0.1s linear;
-    }
+  /* glass layers */
+  --glass-bg:      rgba(8,24,38,0.55);
+  --glass-border:  rgba(111,209,215,0.15);
+  --glass-shine:   rgba(111,209,215,0.06);
+  --glass-blur:    24px;
 
-    /* ── Content scroll container ───────────────────────────── */
-    #scroll-root {
-      position: relative;
-      z-index: 10;
-    }
+  --glass-card-bg:     rgba(9,60,93,0.35);
+  --glass-card-border: rgba(111,209,215,0.18);
 
-    /* ── Section panels ─────────────────────────────────────── */
-    .panel {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px clamp(20px, 8vw, 120px);
-      position: relative;
-    }
+  --glass-chip-bg:     rgba(59,117,151,0.18);
+  --glass-chip-border: rgba(111,209,215,0.22);
+}
+[data-theme="light"] {
+  --bg:   #dff0f5;
+  --text: #052030;
+  --sub:  #2d6a88;
+  --dim:  #7aabbd;
 
-    /* Glass content card */
-    .glass {
-      background: color-mix(in srgb, var(--bg) 72%, transparent);
-      border: 1px solid var(--bdr);
-      backdrop-filter: blur(18px) saturate(140%);
-      -webkit-backdrop-filter: blur(18px) saturate(140%);
-      padding: clamp(28px, 4vw, 52px);
-      max-width: 620px;
-      border-radius: 3px;
-    }
-    [data-theme="light"] .glass {
-      background: color-mix(in srgb, var(--bg) 82%, transparent);
-    }
+  --glass-bg:      rgba(220,240,248,0.60);
+  --glass-border:  rgba(59,117,151,0.25);
+  --glass-shine:   rgba(255,255,255,0.35);
 
-    /* ── Header ─────────────────────────────────────────────── */
-    #site-header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px clamp(20px, 5vw, 60px);
-      border-bottom: 1px solid var(--bdr);
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .logo { font-family: "DM Mono", monospace; font-size: .86rem; letter-spacing: .05em; color: var(--sky); }
-    .logo .sep { color: var(--dim); margin: 0 6px; }
-    nav { display: flex; gap: 24px; }
-    nav a {
-      font-family: "DM Mono", monospace; font-size: .72rem;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--sub); text-decoration: none;
-      transition: color .15s;
-    }
-    nav a:hover { color: var(--sky); }
-    .ctrl-row { display: flex; gap: 8px; }
-    .ctrl {
-      font-family: "DM Mono", monospace; font-size: .72rem;
-      letter-spacing: .05em; background: transparent;
-      border: 1px solid var(--bdhi); color: var(--sub);
-      padding: 4px 10px; cursor: pointer; border-radius: 2px;
-      transition: border-color .15s, color .15s;
-    }
-    .ctrl:hover { border-color: var(--sky); color: var(--sky); }
-    .ctrl:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
-    .sr-only { position: absolute; width:1px; height:1px; clip: rect(0,0,0,0); overflow: hidden; }
+  --glass-card-bg:     rgba(255,255,255,0.45);
+  --glass-card-border: rgba(59,117,151,0.22);
 
-    /* ── Scroll hint ─────────────────────────────────────────── */
-    .scroll-hint {
-      position: absolute;
-      bottom: 32px; left: 50%;
-      transform: translateX(-50%);
-      font-family: "DM Mono", monospace; font-size: .68rem;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--dim);
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      animation: hintfade 2.4s ease-in-out infinite;
-    }
-    .scroll-hint::after {
-      content: "";
-      width: 1px; height: 32px;
-      background: linear-gradient(to bottom, var(--dim), transparent);
-    }
-    @keyframes hintfade { 0%,100%{opacity:.3} 50%{opacity:.9} }
+  --glass-chip-bg:     rgba(111,209,215,0.18);
+  --glass-chip-border: rgba(59,117,151,0.28);
+}
 
-    /* ── Typography ─────────────────────────────────────────── */
-    .eyebrow {
-      font-family: "DM Mono", monospace; font-size: .72rem;
-      letter-spacing: .16em; text-transform: uppercase;
-      color: var(--mint); margin-bottom: 16px;
-    }
-    h1 {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(2.6rem, 4.5vw + 1rem, 5rem);
-      font-weight: 400; line-height: 1.02; letter-spacing: -.01em;
-      color: var(--text); margin-bottom: 6px;
-    }
-    h1 em { font-style: italic; color: var(--sky); }
-    .hero-sub {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(1.2rem, 1.5vw + .5rem, 1.8rem);
-      color: var(--sub); font-weight: 400; margin-bottom: 24px;
-    }
-    .body-mono {
-      font-family: "DM Mono", monospace; font-size: .83rem;
-      line-height: 1.75; color: var(--sub); margin-bottom: 28px;
-    }
-    h2 {
-      font-size: 1.3rem; font-weight: 700;
-      letter-spacing: -.01em; margin-bottom: 6px;
-    }
-    .sec-sub {
-      font-family: "DM Mono", monospace; font-size: .72rem;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--dim); margin-bottom: 24px;
-    }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{
+  font-family:"Syne",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-    /* ── Pills ──────────────────────────────────────────────── */
-    .pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px; }
-    .pill {
-      font-family: "DM Mono", monospace; font-size: .68rem;
-      letter-spacing: .07em; color: var(--dim);
-      border: 1px solid var(--bdr); padding: 4px 10px; border-radius: 2px;
-    }
+/* ── Canvas (fixed, behind everything) ───────── */
+#c{
+  position:fixed;inset:0;
+  width:100vw;height:100vh;
+  z-index:0;pointer-events:none;
+}
 
-    /* ── Buttons ─────────────────────────────────────────────── */
-    .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
-    .btn {
-      font-family: "DM Mono", monospace; font-size: .8rem;
-      letter-spacing: .04em; padding: 9px 18px;
-      border-radius: 2px; cursor: pointer; text-decoration: none;
-      display: inline-flex; align-items: center;
-      transition: background .15s, color .15s, border-color .15s;
-      border: none;
-    }
-    .btn-fill { background: var(--sky); color: var(--navy); font-weight: 500; }
-    .btn-fill:hover { background: var(--mint); }
-    .btn-line { background: transparent; color: var(--sub); border: 1px solid var(--bdhi); }
-    .btn-line:hover { border-color: var(--sky); color: var(--sky); }
-    .btn:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+/* ── Scroll root ──────────────────────────────── */
+#sr{position:relative;z-index:2}
 
-    /* ── Timeline ────────────────────────────────────────────── */
-    .tl { display: flex; flex-direction: column; }
-    .tl-row {
-      display: grid; grid-template-columns: 90px 1fr auto;
-      align-items: center; gap: 16px;
-      padding: 16px 0; border-bottom: 1px solid var(--bdr);
-      cursor: pointer; transition: padding-left .15s, background .15s;
-    }
-    .tl-row:first-child { border-top: 1px solid var(--bdr); }
-    .tl-row:hover { padding-left: 8px; background: color-mix(in srgb, var(--surf) 60%, transparent); }
-    .tl-role { font-family: "DM Mono", monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
-    .tl-name { font-size: .92rem; font-weight: 600; color: var(--text); margin-bottom: 3px; display: flex; align-items: center; gap: 8px; }
-    .new-f { font-family: "DM Mono", monospace; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mint); border: 1px solid var(--mint); padding: 1px 5px; border-radius: 2px; font-weight: 400; }
-    .tl-desc { font-family: "DM Mono", monospace; font-size: .75rem; line-height: 1.55; color: var(--sub); }
-    .tl-btn { font-family: "DM Mono", monospace; font-size: .68rem; letter-spacing: .06em; padding: 4px 10px; border: 1px solid var(--bdhi); background: transparent; color: var(--sub); cursor: pointer; border-radius: 2px; white-space: nowrap; transition: border-color .15s, color .15s; }
-    .tl-btn:hover { border-color: var(--sky); color: var(--sky); }
+/* ══════════════════════════════════════════════
+   GLASS SYSTEM
+   Three tiers: chrome (header/nav), panel (section), chip
+══════════════════════════════════════════════ */
 
-    /* ── Extension cards ─────────────────────────────────────── */
-    .ext-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 2px; background: var(--bdr); }
-    .ext-card { background: color-mix(in srgb, var(--bg) 90%, transparent); padding: 22px 18px; display: flex; flex-direction: column; gap: 9px; backdrop-filter: blur(8px); transition: background .15s; }
-    .ext-card:hover { background: color-mix(in srgb, var(--surf) 85%, transparent); }
-    .ext-name { font-size: .92rem; font-weight: 700; color: var(--text); }
-    .ext-desc { font-family: "DM Mono", monospace; font-size: .75rem; line-height: 1.6; color: var(--sub); flex: 1; }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
-    .chip { font-family: "DM Mono", monospace; font-size: .64rem; letter-spacing: .04em; padding: 3px 7px; border: 1px solid var(--bdhi); color: var(--dim); border-radius: 2px; transition: border-color .15s, color .15s; }
-    .chip:hover { border-color: var(--sky); color: var(--sky); }
+/* Tier 1 — chrome (header) */
+.chrome{
+  background:var(--glass-bg);
+  border-bottom:1px solid var(--glass-border);
+  backdrop-filter:blur(var(--glass-blur)) saturate(160%);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(160%);
+}
 
-    /* ── Skills ticker ───────────────────────────────────────── */
-    .ticker-wrap { border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr); padding: 11px 0; overflow: hidden; margin-bottom: 2px; }
-    .ticker-inner { display: flex; mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); }
-    .ticker-track { display: flex; gap: 0; animation: tick 24s linear infinite; flex-shrink: 0; }
-    .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
-    .t-item { font-family: "DM Mono", monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); padding: 0 18px; border-right: 1px solid var(--bdr); white-space: nowrap; transition: color .12s; }
-    .t-item:hover { color: var(--sky); }
-    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* Tier 2 — panel card */
+.panel-glass{
+  position:relative;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(var(--glass-blur)) saturate(160%);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(160%);
+  border-radius:2px;
+  overflow:hidden;
+}
+/* Specular top-edge shine */
+.panel-glass::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,var(--glass-shine) 30%,rgba(93,248,216,0.2) 60%,transparent 100%);
+  pointer-events:none;
+}
+/* Subtle inner-left edge refraction */
+.panel-glass::after{
+  content:"";
+  position:absolute;top:0;left:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,var(--glass-shine) 0%,transparent 70%);
+  pointer-events:none;
+}
 
-    /* ── Skill cols ──────────────────────────────────────────── */
-    .sk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 2px; background: var(--bdr); }
-    .sk-col { background: color-mix(in srgb, var(--bg) 90%, transparent); padding: 22px 18px; transition: background .15s; backdrop-filter: blur(8px); }
-    .sk-col:hover { background: color-mix(in srgb, var(--surf) 85%, transparent); }
-    .sk-head { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .sk-body { font-family: "DM Mono", monospace; font-size: .75rem; line-height: 1.65; color: var(--sub); margin-bottom: 12px; }
+/* Tier 3 — card inside panel */
+.glass-card{
+  position:relative;
+  background:var(--glass-card-bg);
+  border:1px solid var(--glass-card-border);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-radius:2px;
+  transition:border-color .2s,background .2s;
+}
+.glass-card:hover{
+  background:rgba(9,60,93,0.5);
+  border-color:rgba(111,209,215,0.32);
+}
+[data-theme="light"] .glass-card:hover{
+  background:rgba(255,255,255,0.65);
+}
 
-    /* ── Footer ─────────────────────────────────────────────── */
-    footer {
-      position: relative; z-index: 10;
-      border-top: 1px solid var(--bdr);
-      padding: 24px clamp(20px, 8vw, 120px);
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-      font-family: "DM Mono", monospace; font-size: .7rem;
-      letter-spacing: .05em; color: var(--dim);
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
-      backdrop-filter: blur(12px);
-    }
+/* Tier 4 — chip */
+.chip{
+  font-family:"DM Mono",monospace;
+  font-size:.65rem;letter-spacing:.05em;
+  padding:3px 9px;border-radius:2px;
+  background:var(--glass-chip-bg);
+  border:1px solid var(--glass-chip-border);
+  color:var(--sub);
+  transition:border-color .15s,color .15s,background .15s;
+}
+.chip:hover{
+  border-color:rgba(93,248,216,0.5);
+  color:var(--sky);
+  background:rgba(93,248,216,0.08);
+}
 
-    /* ── Toast ───────────────────────────────────────────────── */
-    .toast {
-      position: fixed; bottom: 24px; right: 24px;
-      background: var(--surf); color: var(--text);
-      border: 1px solid var(--bdhi); padding: 9px 14px;
-      font-family: "DM Mono", monospace; font-size: .75rem;
-      border-radius: 2px; opacity: 0; transform: translateY(8px);
-      transition: opacity .18s, transform .18s;
-      pointer-events: none; z-index: 300;
-    }
-    .toast.show { opacity: 1; transform: translateY(0); }
+/* ══════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════ */
+#hdr{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px clamp(20px,5vw,56px);
+  gap:12px;flex-wrap:wrap;
+}
+.logo{
+  font-family:"DM Mono",monospace;font-size:.85rem;
+  letter-spacing:.05em;color:var(--sky);
+}
+.logo .sep{color:var(--dim);margin:0 5px}
+nav{display:flex;gap:24px}
+nav a{
+  font-family:"DM Mono",monospace;font-size:.72rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--sub);text-decoration:none;
+  transition:color .15s;
+}
+nav a:hover{color:var(--sky)}
+.ctrl-row{display:flex;gap:7px}
+.ctrl{
+  font-family:"DM Mono",monospace;font-size:.72rem;
+  letter-spacing:.05em;
+  background:rgba(111,209,215,0.06);
+  border:1px solid var(--glass-border);
+  color:var(--sub);padding:4px 10px;cursor:pointer;
+  border-radius:2px;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.ctrl:hover{border-color:rgba(111,209,215,0.4);color:var(--sky);background:rgba(111,209,215,0.1)}
+.ctrl:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden}
 
-    /* ── Section indicator dots ──────────────────────────────── */
-    #dots {
-      position: fixed; right: 20px; top: 50%;
-      transform: translateY(-50%);
-      display: flex; flex-direction: column; gap: 10px;
-      z-index: 200;
-    }
-    .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      border: 1px solid var(--steel);
-      background: transparent;
-      cursor: pointer; transition: background .2s, border-color .2s;
-    }
-    .dot.active { background: var(--sky); border-color: var(--sky); }
+/* ══════════════════════════════════════════════
+   PROGRESS BAR
+══════════════════════════════════════════════ */
+#pbar{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--sky),var(--mint));
+  z-index:200;transition:width .08s linear;
+}
 
-    /* ── Responsive ──────────────────────────────────────────── */
-    @media (max-width: 640px) {
-      #site-header { flex-wrap: wrap; }
-      nav { gap: 14px; }
-      .tl-row { grid-template-columns: 70px 1fr; }
-      .tl-btn { display: none; }
-      .panel { padding: 80px 20px 60px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .ticker-track { animation: none; }
-      * { transition-duration: .01ms !important; }
-    }
-  </style>
+/* ══════════════════════════════════════════════
+   SECTION DOTS
+══════════════════════════════════════════════ */
+#dots{
+  position:fixed;right:18px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:9px;z-index:100;
+}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  border:1px solid var(--steel);background:transparent;
+  cursor:pointer;transition:background .2s,border-color .2s,transform .2s;
+}
+.dot.active{background:var(--sky);border-color:var(--sky);transform:scale(1.3)}
+
+/* ══════════════════════════════════════════════
+   PANELS — sticky scroll
+══════════════════════════════════════════════ */
+.section-wrap{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:100px clamp(20px,8vw,110px) 60px;
+}
+
+/* ══════════════════════════════════════════════
+   TYPOGRAPHY
+══════════════════════════════════════════════ */
+.eyebrow{
+  font-family:"DM Mono",monospace;font-size:.7rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mint);margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{
+  content:"";display:inline-block;
+  width:28px;height:1px;background:var(--mint);opacity:.6;
+}
+h1{
+  font-family:"Instrument Serif",Georgia,serif;
+  font-size:clamp(2.8rem,4.5vw+1rem,5.4rem);
+  font-weight:400;line-height:1.0;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:4px;
+}
+h1 em{font-style:italic;color:var(--sky)}
+.hero-line2{
+  font-family:"Instrument Serif",Georgia,serif;
+  font-size:clamp(1.2rem,1.6vw+.4rem,1.9rem);
+  font-style:italic;color:var(--sub);
+  font-weight:400;margin-bottom:26px;
+}
+.body-mono{
+  font-family:"DM Mono",monospace;font-size:.83rem;
+  line-height:1.78;color:var(--sub);margin-bottom:28px;
+  max-width:500px;
+}
+h2{
+  font-family:"Instrument Serif",Georgia,serif;
+  font-size:clamp(1.8rem,2.5vw+.5rem,2.8rem);
+  font-weight:400;font-style:italic;
+  letter-spacing:-.01em;margin-bottom:4px;
+  color:var(--text);
+}
+.sec-sub{
+  font-family:"DM Mono",monospace;font-size:.7rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:28px;
+}
+
+/* ══════════════════════════════════════════════
+   HERO LAYOUT
+══════════════════════════════════════════════ */
+.hero-inner{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:32px;align-items:start;
+  width:100%;max-width:1100px;
+}
+.hero-panel{padding:40px 44px}
+
+/* Pills */
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+.pill{
+  font-family:"DM Mono",monospace;font-size:.68rem;
+  letter-spacing:.07em;color:var(--dim);
+  background:var(--glass-chip-bg);
+  border:1px solid var(--glass-chip-border);
+  padding:4px 10px;border-radius:2px;
+}
+
+/* Buttons */
+.btn-row{display:flex;flex-wrap:wrap;gap:9px}
+.btn{
+  font-family:"DM Mono",monospace;font-size:.8rem;
+  letter-spacing:.04em;padding:9px 18px;border-radius:2px;
+  cursor:pointer;text-decoration:none;display:inline-flex;
+  align-items:center;border:none;
+  transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
+}
+.btn-fill{
+  background:var(--sky);color:var(--navy);font-weight:600;
+}
+.btn-fill:hover{background:var(--mint);box-shadow:0 0 20px rgba(93,248,216,0.25)}
+.btn-line{
+  background:rgba(111,209,215,0.06);
+  color:var(--sub);
+  border:1px solid var(--glass-chip-border);
+}
+.btn-line:hover{border-color:rgba(111,209,215,0.4);color:var(--sky);background:rgba(111,209,215,0.1)}
+.btn:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+
+/* Scroll hint */
+.scroll-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  font-family:"DM Mono",monospace;font-size:.65rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:hint 2.6s ease-in-out infinite;
+}
+.scroll-hint::after{
+  content:"";width:1px;height:28px;
+  background:linear-gradient(to bottom,var(--dim),transparent);
+}
+@keyframes hint{0%,100%{opacity:.25}50%{opacity:.8}}
+
+/* ── HERO ASIDE ───────────────────────────────── */
+.aside-stack{display:flex;flex-direction:column;gap:2px}
+.aside-cell{
+  padding:18px 20px;
+  border-bottom:1px solid var(--glass-border);
+  transition:background .15s;
+}
+.aside-cell:last-child{border-bottom:none}
+.aside-cell:hover{background:rgba(111,209,215,0.04)}
+.aside-lbl{
+  font-family:"DM Mono",monospace;font-size:.63rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:5px;
+}
+.aside-val{
+  font-size:1rem;font-weight:700;color:var(--sky);margin-bottom:3px;
+}
+.aside-body{
+  font-family:"DM Mono",monospace;font-size:.76rem;
+  line-height:1.55;color:var(--sub);
+}
+
+/* ══════════════════════════════════════════════
+   WORK SECTION
+══════════════════════════════════════════════ */
+.work-inner{width:100%;max-width:780px}
+.work-panel{padding:36px 40px}
+
+.tl-item{
+  display:grid;grid-template-columns:88px 1fr auto;
+  align-items:center;gap:18px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(111,209,215,0.1);
+  cursor:pointer;
+  transition:padding-left .15s,background .15s;
+}
+.tl-item:first-child{border-top:1px solid rgba(111,209,215,0.1)}
+.tl-item:hover{
+  padding-left:10px;
+  background:rgba(111,209,215,0.04);
+  margin:0 -10px;padding-right:10px;
+}
+.tl-role{
+  font-family:"DM Mono",monospace;font-size:.65rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+}
+.tl-name{
+  font-size:.94rem;font-weight:600;color:var(--text);
+  margin-bottom:3px;display:flex;align-items:center;gap:8px;
+}
+.new-f{
+  font-family:"DM Mono",monospace;font-size:.58rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mint);border:1px solid rgba(93,248,216,0.4);
+  padding:1px 5px;border-radius:2px;font-weight:400;
+  background:rgba(93,248,216,0.06);
+}
+.tl-desc{
+  font-family:"DM Mono",monospace;font-size:.76rem;
+  line-height:1.55;color:var(--sub);
+}
+.tl-btn{
+  font-family:"DM Mono",monospace;font-size:.67rem;
+  letter-spacing:.06em;
+  padding:5px 12px;
+  border:1px solid var(--glass-chip-border);
+  background:var(--glass-chip-bg);
+  color:var(--sub);cursor:pointer;border-radius:2px;
+  white-space:nowrap;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.tl-btn:hover{border-color:rgba(111,209,215,0.4);color:var(--sky);background:rgba(111,209,215,0.1)}
+
+/* ══════════════════════════════════════════════
+   EXTENSIONS SECTION
+══════════════════════════════════════════════ */
+.ext-inner{width:100%;max-width:920px}
+.ext-panel{padding:36px 40px}
+.ext-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:rgba(111,209,215,0.1);
+  border:1px solid rgba(111,209,215,0.1);
+}
+.ext-card{
+  padding:24px 20px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:background .15s;
+}
+.ext-card:hover{background:rgba(111,209,215,0.05)}
+.ext-name{font-size:.9rem;font-weight:700;color:var(--text)}
+.ext-desc{
+  font-family:"DM Mono",monospace;font-size:.76rem;
+  line-height:1.65;color:var(--sub);flex:1;
+}
+.chip-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+
+/* ══════════════════════════════════════════════
+   SKILLS SECTION
+══════════════════════════════════════════════ */
+.sk-inner{width:100%;max-width:920px}
+.sk-panel{padding:36px 40px}
+
+.ticker-wrap{
+  border-top:1px solid rgba(111,209,215,0.12);
+  border-bottom:1px solid rgba(111,209,215,0.12);
+  padding:11px 0;overflow:hidden;margin-bottom:2px;
+}
+.ticker-inner{
+  display:flex;
+  mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+}
+.ticker-track{
+  display:flex;gap:0;
+  animation:tick 26s linear infinite;flex-shrink:0;
+}
+.ticker-wrap:hover .ticker-track{animation-play-state:paused}
+.t-item{
+  font-family:"DM Mono",monospace;font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+  padding:0 18px;border-right:1px solid rgba(111,209,215,0.1);
+  white-space:nowrap;transition:color .12s;
+}
+.t-item:hover{color:var(--sky)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.sk-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;background:rgba(111,209,215,0.1);
+  border:1px solid rgba(111,209,215,0.1);
+  margin-top:2px;
+}
+.sk-col{
+  padding:22px 20px;
+  transition:background .15s;
+}
+.sk-col:hover{background:rgba(111,209,215,0.05)}
+.sk-head{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.sk-body{
+  font-family:"DM Mono",monospace;font-size:.76rem;
+  line-height:1.65;color:var(--sub);margin-bottom:12px;
+}
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer{
+  position:relative;z-index:2;
+  border-top:1px solid rgba(111,209,215,0.1);
+  padding:22px clamp(20px,5vw,56px);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:"DM Mono",monospace;font-size:.7rem;
+  letter-spacing:.05em;color:var(--dim);
+  background:rgba(6,17,26,0.6);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+
+/* ══════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════ */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:300;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  color:var(--text);padding:10px 16px;
+  font-family:"DM Mono",monospace;font-size:.76rem;
+  border-radius:2px;opacity:0;transform:translateY(8px);
+  transition:opacity .18s,transform .18s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ══════════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════════ */
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}
+.reveal-d2{transition-delay:.16s}
+.reveal-d3{transition-delay:.24s}
+.reveal-d4{transition-delay:.32s}
+.reveal-d5{transition-delay:.40s}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media(max-width:860px){
+  .hero-inner{grid-template-columns:1fr}
+  .ext-grid,.sk-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  #hdr{flex-wrap:wrap}
+  nav{gap:14px}
+  .hero-panel,.work-panel,.ext-panel,.sk-panel{padding:26px 22px}
+  .tl-item{grid-template-columns:70px 1fr}
+  .tl-btn{display:none}
+  .section-wrap{padding:80px 16px 50px}
+  #dots{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .ticker-track{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms!important}
+}
+</style>
 </head>
 <body>
 
-<!-- THREE.js canvas -->
+<!-- WebGL canvas -->
 <canvas id="c"></canvas>
 
-<!-- Scroll progress bar -->
-<div id="progress-bar"></div>
+<!-- Progress -->
+<div id="pbar"></div>
 
-<!-- Section nav dots -->
+<!-- Section dots -->
 <div id="dots">
-  <div class="dot active" data-section="0" title="Home"></div>
-  <div class="dot" data-section="1" title="Work"></div>
-  <div class="dot" data-section="2" title="Extensions"></div>
-  <div class="dot" data-section="3" title="Skills"></div>
+  <div class="dot active" data-s="0"></div>
+  <div class="dot" data-s="1"></div>
+  <div class="dot" data-s="2"></div>
+  <div class="dot" data-s="3"></div>
 </div>
 
 <!-- Fixed header -->
-<header id="site-header">
+<header id="hdr" class="chrome">
   <div class="logo">super_man2775<span class="sep">/</span>portfolio</div>
   <nav>
     <a href="#hero">Home</a>
@@ -322,133 +548,142 @@
     <a href="#skills">Skills</a>
   </nav>
   <div class="ctrl-row">
-    <label class="sr-only" for="langSel">Language</label>
-    <select class="ctrl" id="langSel">
+    <label class="sr-only" for="ls">Language</label>
+    <select class="ctrl" id="ls">
       <option value="en">EN</option>
       <option value="nl">NL</option>
-      <option value="de-AT">DE</option>
+      <option value="de">DE</option>
       <option value="fr">FR</option>
     </select>
-    <button class="ctrl" id="themeBtn" type="button">Light</button>
+    <button class="ctrl" id="tb" type="button">Light</button>
   </div>
 </header>
 
-<!-- ═══ SCROLL CONTENT ═══════════════════════════════════════ -->
-<div id="scroll-root">
+<!-- ═══ SECTIONS ══════════════════════════════ -->
+<div id="sr">
 
-  <!-- § HERO -->
-  <section class="panel" id="hero" data-sec="0">
-    <div class="glass">
-      <p class="eyebrow">Teen Builder · Belgium</p>
-      <h1>Hi, I'm<br><em>super_man2775</em></h1>
-      <p class="hero-sub">extension creator and lead dev.</p>
-      <p class="body-mono">
-        15-year-old developer from Belgium. I build browser extensions for Smartschool,
-        ship programming courses on IT Learn, and pick up whatever skill the next project needs.
-      </p>
-      <div class="pills">
+<!-- § HERO ───────────────────────── -->
+<div class="section-wrap" id="hero" data-s="0">
+  <div class="hero-inner">
+    <div class="panel-glass hero-panel">
+      <p class="eyebrow reveal">Teen Builder · Belgium</p>
+      <h1 class="reveal reveal-d1">Hi, I'm<br><em>super_man2775</em></h1>
+      <p class="hero-line2 reveal reveal-d2">extension creator and lead dev.</p>
+      <p class="body-mono reveal reveal-d3">15-year-old developer from Belgium. I build browser extensions for Smartschool, ship programming courses on IT Learn, and learn whatever the next project demands.</p>
+      <div class="pills reveal reveal-d3">
         <span class="pill">Belgium</span>
         <span class="pill">Age 15</span>
         <span class="pill">JavaScript</span>
         <span class="pill">Python</span>
         <span class="pill">Browser Extensions</span>
       </div>
-      <div class="btn-row" id="contact">
-        <button class="btn btn-fill" id="discordBtn">Copy Discord</button>
+      <div class="btn-row reveal reveal-d4" id="contact">
+        <button class="btn btn-fill" id="dBtn">Copy Discord</button>
         <a class="btn btn-line" href="https://discord.com/users/1349389611402662021" target="_blank" rel="noreferrer">Open Discord</a>
         <a class="btn btn-line" href="https://github.com/superman2775" target="_blank" rel="noreferrer">GitHub</a>
       </div>
     </div>
-    <div class="scroll-hint">scroll</div>
-  </section>
 
-  <!-- § WORK -->
-  <section class="panel" id="work" data-sec="1">
-    <div class="glass" style="max-width:700px">
-      <h2>Work</h2>
-      <p class="sec-sub">Main accomplishments</p>
-      <div class="tl">
-        <div class="tl-row" data-link="https://itlearn.be/">
+    <div class="panel-glass aside-stack reveal reveal-d2">
+      <div class="aside-cell">
+        <div class="aside-lbl">Projects</div>
+        <div class="aside-val">4 Extensions</div>
+        <div class="aside-body">AI Assistant, Games, Results Leaderboard, Achievements</div>
+      </div>
+      <div class="aside-cell">
+        <div class="aside-lbl">Platform</div>
+        <div class="aside-val">IT Learn</div>
+        <div class="aside-body">Free interactive programming courses</div>
+      </div>
+      <div class="aside-cell">
+        <div class="aside-lbl">Reach</div>
+        <div class="aside-val">300+ users</div>
+        <div class="aside-body">Active across all extensions and platforms</div>
+      </div>
+      <div class="aside-cell">
+        <div class="aside-lbl">Focus</div>
+        <div class="aside-val">EdTech</div>
+        <div class="aside-body">Usability, performance, and a bit of fun</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</div>
+
+<!-- § WORK ───────────────────────── -->
+<div class="section-wrap" id="work" data-s="1">
+  <div class="work-inner">
+    <div class="panel-glass work-panel">
+      <p class="eyebrow reveal">01</p>
+      <h2 class="reveal reveal-d1">Work</h2>
+      <p class="sec-sub reveal reveal-d2">Main accomplishments</p>
+      <div class="tl-list">
+        <div class="tl-item reveal reveal-d2" data-link="https://itlearn.be/">
           <span class="tl-role">Lead Dev</span>
-          <div>
-            <div class="tl-name">IT Learn</div>
-            <div class="tl-desc">HTML, CSS and GitHub courses. I write lessons and keep the platform running.</div>
-          </div>
+          <div><div class="tl-name">IT Learn</div><div class="tl-desc">HTML, CSS and GitHub courses. I write lessons and keep the platform running.</div></div>
           <button class="tl-btn">Open</button>
         </div>
-        <div class="tl-row" data-link="https://github.com/superman2775/Smartschool-GPT/">
+        <div class="tl-item reveal reveal-d3" data-link="https://github.com/superman2775/Smartschool-GPT/">
           <span class="tl-role">Extension</span>
-          <div>
-            <div class="tl-name">Smartschool AI Assistant</div>
-            <div class="tl-desc">Ask an AI questions without leaving Smartschool.</div>
-          </div>
+          <div><div class="tl-name">Smartschool AI Assistant</div><div class="tl-desc">Ask an AI questions without leaving Smartschool.</div></div>
           <button class="tl-btn">Open</button>
         </div>
-        <div class="tl-row" data-link="https://github.com/superman2775/Smartschool-Games/">
+        <div class="tl-item reveal reveal-d3" data-link="https://github.com/superman2775/Smartschool-Games/">
           <span class="tl-role">Extension</span>
-          <div>
-            <div class="tl-name">Smartschool Games</div>
-            <div class="tl-desc">Six playable games, embedded directly in Smartschool.</div>
-          </div>
+          <div><div class="tl-name">Smartschool Games</div><div class="tl-desc">Six playable games, embedded directly in Smartschool.</div></div>
           <button class="tl-btn">Open</button>
         </div>
-        <div class="tl-row" data-link="https://github.com/superman2775/smartschool-results-leaderboard/">
+        <div class="tl-item reveal reveal-d4" data-link="https://github.com/superman2775/smartschool-results-leaderboard/">
           <span class="tl-role">Extension</span>
-          <div>
-            <div class="tl-name">Results Leaderboard</div>
-            <div class="tl-desc">Ranks students by grades. Makes learning competitive in a low-stakes way.</div>
-          </div>
+          <div><div class="tl-name">Results Leaderboard</div><div class="tl-desc">Ranks students by grades. Makes learning competitive in a low-stakes way.</div></div>
           <button class="tl-btn">Open</button>
         </div>
-        <div class="tl-row" data-link="https://github.com/superman2775/Smartschool-Achievements/">
+        <div class="tl-item reveal reveal-d4" data-link="https://github.com/superman2775/Smartschool-Achievements/">
           <span class="tl-role">Extension</span>
-          <div>
-            <div class="tl-name">Smartschool Achievements <span class="new-f">New</span></div>
-            <div class="tl-desc">Badges and rewards for studying, with a built-in leaderboard.</div>
-          </div>
+          <div><div class="tl-name">Smartschool Achievements <span class="new-f">New</span></div><div class="tl-desc">Badges and rewards for studying, with a built-in leaderboard.</div></div>
           <button class="tl-btn">Open</button>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- § EXTENSIONS -->
-  <section class="panel" id="extensions" data-sec="2">
-    <div class="glass" style="max-width:760px">
-      <h2>Extension Lab</h2>
-      <p class="sec-sub">Smartschool</p>
-      <div class="ext-grid">
-        <div class="ext-card">
+<!-- § EXTENSIONS ─────────────────── -->
+<div class="section-wrap" id="extensions" data-s="2">
+  <div class="ext-inner">
+    <div class="panel-glass ext-panel">
+      <p class="eyebrow reveal">02</p>
+      <h2 class="reveal reveal-d1">Extension Lab</h2>
+      <p class="sec-sub reveal reveal-d2">Smartschool</p>
+      <div class="ext-grid reveal reveal-d3">
+        <div class="glass-card ext-card">
           <div class="ext-name">AI Assistant</div>
           <div class="ext-desc">Puts an AI chat panel inside Smartschool. Students ask questions; the extension answers in context.</div>
-          <div class="chip-row">
-            <span class="chip">AI Integration</span><span class="chip">API</span><span class="chip">AI Models</span>
-          </div>
+          <div class="chip-row"><span class="chip">AI Integration</span><span class="chip">API</span><span class="chip">AI Models</span></div>
         </div>
-        <div class="ext-card">
+        <div class="glass-card ext-card">
           <div class="ext-name">Games</div>
           <div class="ext-desc">Six multiplayer games injected into the platform. Break up the monotony without leaving the tab.</div>
-          <div class="chip-row">
-            <span class="chip">iFrame</span><span class="chip">Multiplayer</span><span class="chip">Motivation</span>
-          </div>
+          <div class="chip-row"><span class="chip">iFrame</span><span class="chip">Multiplayer</span><span class="chip">Motivation</span></div>
         </div>
-        <div class="ext-card">
+        <div class="glass-card ext-card">
           <div class="ext-name">Results Leaderboard</div>
           <div class="ext-desc">Scrapes grade data and renders a live ranking. Turns a private stat into a shared one.</div>
-          <div class="chip-row">
-            <span class="chip">Analytics</span><span class="chip">Ranking UI</span><span class="chip">Community</span>
-          </div>
+          <div class="chip-row"><span class="chip">Analytics</span><span class="chip">Ranking UI</span><span class="chip">Community</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- § SKILLS -->
-  <section class="panel" id="skills" data-sec="3">
-    <div class="glass" style="max-width:760px">
-      <h2>Skills</h2>
-      <p class="sec-sub">Stack</p>
-      <div class="ticker-wrap">
+<!-- § SKILLS ─────────────────────── -->
+<div class="section-wrap" id="skills" data-s="3">
+  <div class="sk-inner">
+    <div class="panel-glass sk-panel">
+      <p class="eyebrow reveal">03</p>
+      <h2 class="reveal reveal-d1">Skills</h2>
+      <p class="sec-sub reveal reveal-d2">Stack</p>
+      <div class="ticker-wrap reveal reveal-d2">
         <div class="ticker-inner">
           <div class="ticker-track">
             <span class="t-item">JavaScript</span><span class="t-item">Python</span>
@@ -470,519 +705,350 @@
           </div>
         </div>
       </div>
-      <div class="sk-grid" style="margin-top:2px">
-        <div class="sk-col">
+      <div class="sk-grid reveal reveal-d3">
+        <div class="glass-card sk-col">
           <div class="sk-head">What I build</div>
           <div class="sk-body">Student-facing tools: extensions that strip friction, dashboards that surface what matters, widgets that add fun without getting in the way.</div>
           <div class="chip-row"><span class="chip">Chrome Extensions</span><span class="chip">Dashboards</span><span class="chip">Widgets</span></div>
         </div>
-        <div class="sk-col">
+        <div class="glass-card sk-col">
           <div class="sk-head">How I work</div>
           <div class="sk-body">Ship something, get feedback from classmates, fix what breaks, repeat. Weekly cycles keep things real.</div>
           <div class="chip-row"><span class="chip">Product thinking</span><span class="chip">Agile</span><span class="chip">Collaboration</span></div>
         </div>
-        <div class="sk-col">
+        <div class="glass-card sk-col">
           <div class="sk-head">Currently exploring</div>
           <div class="sk-body">AI-assisted study planning and per-student progress visualisation. Making the data Smartschool already has actually useful.</div>
           <div class="chip-row"><span class="chip">Personalization</span><span class="chip">Data viz</span><span class="chip">Automation</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
 </div><!-- /scroll-root -->
 
-<footer>
+<footer class="chrome">
   <span>© <span id="yr"></span> super_man2775</span>
   <span>Built for students, by a student</span>
 </footer>
 
 <div class="toast" id="toast"></div>
 
-<!-- THREE.js from CDN -->
+<!-- THREE.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
 <script>
-// ═══════════════════════════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════════════════════════
-document.getElementById("yr").textContent = new Date().getFullYear();
+/* ═══════════════════════════════════════════════════
+   UTILS
+═══════════════════════════════════════════════════ */
+const lerp=(a,b,t)=>a+(b-a)*t;
+const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+const ease=(t)=>t<.5?2*t*t:-1+(4-2*t)*t;
+document.getElementById("yr").textContent=new Date().getFullYear();
 
-function lerp(a, b, t) { return a + (b - a) * t; }
-function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-function easeInOut(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
-
-// ═══════════════════════════════════════════════════════════════
-// THEME / LANG (simple, no full i18n this version)
-// ═══════════════════════════════════════════════════════════════
-const root = document.documentElement;
-const themeBtn = document.getElementById("themeBtn");
-const savedTheme = localStorage.getItem("theme") ||
-  (matchMedia("(prefers-color-scheme:light)").matches ? "light" : "dark");
-root.dataset.theme = savedTheme;
-themeBtn.textContent = savedTheme === "light" ? "Dark" : "Light";
-themeBtn.addEventListener("click", () => {
-  const next = root.dataset.theme === "light" ? "dark" : "light";
-  root.dataset.theme = next;
-  localStorage.setItem("theme", next);
-  themeBtn.textContent = next === "light" ? "Dark" : "Light";
-  updateSceneTheme();
+/* ═══════════════════════════════════════════════════
+   THEME
+═══════════════════════════════════════════════════ */
+const root=document.documentElement;
+const tb=document.getElementById("tb");
+const saved=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme:light)").matches?"light":"dark");
+root.dataset.theme=saved;
+tb.textContent=saved==="light"?"Dark":"Light";
+tb.addEventListener("click",()=>{
+  const n=root.dataset.theme==="light"?"dark":"light";
+  root.dataset.theme=n;localStorage.setItem("theme",n);
+  tb.textContent=n==="light"?"Dark":"Light";
+  updateFog();
 });
 
-// Discord copy
-document.getElementById("discordBtn").addEventListener("click", async () => {
-  const h = "super_man2775";
-  try { await navigator.clipboard.writeText(h); showToast("Discord handle copied: " + h); }
-  catch { showToast("Discord handle: " + h); }
-});
-const toastEl = document.getElementById("toast");
-function showToast(msg) {
-  toastEl.textContent = msg;
-  toastEl.classList.add("show");
-  setTimeout(() => toastEl.classList.remove("show"), 2200);
-}
-
-// Timeline links
-document.querySelectorAll(".tl-row").forEach(row => {
-  const href = (row.dataset.link||"").trim();
-  if (!href) return;
-  const go = () => window.open(href,"_blank","noreferrer");
-  row.addEventListener("click", go);
-  row.tabIndex = 0;
-  row.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){e.preventDefault();go();} });
-  const btn = row.querySelector(".tl-btn");
-  if (btn) btn.addEventListener("click", e => { e.stopPropagation(); go(); });
+/* ═══════════════════════════════════════════════════
+   DISCORD COPY
+═══════════════════════════════════════════════════ */
+const toastEl=document.getElementById("toast");
+function showToast(m){toastEl.textContent=m;toastEl.classList.add("show");setTimeout(()=>toastEl.classList.remove("show"),2200)}
+document.getElementById("dBtn").addEventListener("click",async()=>{
+  try{await navigator.clipboard.writeText("super_man2775");showToast("Discord handle copied: super_man2775")}
+  catch{showToast("Discord handle: super_man2775")}
 });
 
-// ═══════════════════════════════════════════════════════════════
-// SCROLL STATE
-// ═══════════════════════════════════════════════════════════════
-const sections = Array.from(document.querySelectorAll("[data-sec]"));
-const dots = Array.from(document.querySelectorAll(".dot"));
-const progressBar = document.getElementById("progress-bar");
-
-let scrollY = 0;
-let scrollProgress = 0; // 0..1 across entire page
-let sectionIndex = 0;   // 0..3
-
-function onScroll() {
-  scrollY = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  scrollProgress = clamp(scrollY / maxScroll, 0, 1);
-  progressBar.style.width = (scrollProgress * 100) + "%";
-
-  // Which section?
-  let nearest = 0;
-  sections.forEach((s, i) => {
-    const rect = s.getBoundingClientRect();
-    if (rect.top <= window.innerHeight * 0.5) nearest = i;
-  });
-  if (nearest !== sectionIndex) {
-    sectionIndex = nearest;
-    dots.forEach((d,i) => d.classList.toggle("active", i === sectionIndex));
-  }
-}
-window.addEventListener("scroll", onScroll, { passive: true });
-onScroll();
-
-// Dot nav
-dots.forEach(d => {
-  d.addEventListener("click", () => {
-    const idx = +d.dataset.section;
-    sections[idx]?.scrollIntoView({ behavior: "smooth" });
-  });
+/* ═══════════════════════════════════════════════════
+   TIMELINE LINKS
+═══════════════════════════════════════════════════ */
+document.querySelectorAll(".tl-item").forEach(row=>{
+  const href=(row.dataset.link||"").trim();
+  if(!href)return;
+  const go=()=>window.open(href,"_blank","noreferrer");
+  row.addEventListener("click",go);
+  row.tabIndex=0;
+  row.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+  const btn=row.querySelector(".tl-btn");
+  if(btn)btn.addEventListener("click",e=>{e.stopPropagation();go()});
 });
 
-// ═══════════════════════════════════════════════════════════════
-// THREE.JS SCENE
-// ═══════════════════════════════════════════════════════════════
-const canvas = document.getElementById("c");
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.setSize(innerWidth, innerHeight);
-renderer.setClearColor(0x000000, 0);
+/* ═══════════════════════════════════════════════════
+   SCROLL STATE
+═══════════════════════════════════════════════════ */
+const secs=Array.from(document.querySelectorAll("[data-s]"));
+const dots=Array.from(document.querySelectorAll(".dot"));
+let scrollY=0,secIdx=0;
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 200);
-camera.position.set(0, 0, 14);
+window.addEventListener("scroll",()=>{
+  scrollY=window.scrollY;
+  const max=document.body.scrollHeight-innerHeight;
+  document.getElementById("pbar").style.width=clamp(scrollY/max,0,1)*100+"%";
+  let ni=0;
+  secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=innerHeight*.55)ni=i});
+  if(ni!==secIdx){secIdx=ni;dots.forEach((d,i)=>d.classList.toggle("active",i===secIdx))}
+},{passive:true});
 
-// ── Color constants ──────────────────────────────────────────
-const C = {
-  navy:  new THREE.Color("#093C5D"),
-  steel: new THREE.Color("#3B7597"),
-  sky:   new THREE.Color("#6FD1D7"),
-  mint:  new THREE.Color("#5DF8D8"),
-  bg_d:  new THREE.Color("#07131d"),
-  bg_l:  new THREE.Color("#eef5fa"),
+dots.forEach(d=>d.addEventListener("click",()=>secs[+d.dataset.s]?.scrollIntoView({behavior:"smooth"})));
+
+/* ═══════════════════════════════════════════════════
+   SCROLL REVEAL (IntersectionObserver)
+═══════════════════════════════════════════════════ */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("in")});
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>ro.observe(el));
+
+/* ═══════════════════════════════════════════════════
+   THREE.JS SCENE
+═══════════════════════════════════════════════════ */
+const canvas=document.getElementById("c");
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));
+renderer.setSize(innerWidth,innerHeight);
+renderer.setClearColor(0x000000,0);
+
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(52,innerWidth/innerHeight,.1,200);
+camera.position.set(0,0,14);
+
+/* Colors */
+const C={
+  navy: new THREE.Color("#093C5D"),
+  steel:new THREE.Color("#3B7597"),
+  sky:  new THREE.Color("#6FD1D7"),
+  mint: new THREE.Color("#5DF8D8"),
 };
 
-// ── Lighting ─────────────────────────────────────────────────
-const ambLight = new THREE.AmbientLight(0xffffff, 0.3);
-scene.add(ambLight);
-const dirLight = new THREE.DirectionalLight(0x6FD1D7, 1.2);
-dirLight.position.set(5, 8, 6);
-scene.add(dirLight);
-const rimLight = new THREE.PointLight(0x5DF8D8, 0.8, 40);
-rimLight.position.set(-8, -4, 2);
-scene.add(rimLight);
+/* Lighting — cool tones to complement glass UI */
+scene.add(new THREE.AmbientLight(0xd4e9f5,.4));
+const dl=new THREE.DirectionalLight(0x6FD1D7,1.0);
+dl.position.set(6,10,7);scene.add(dl);
+const pl=new THREE.PointLight(0x5DF8D8,.7,50);
+pl.position.set(-8,-3,3);scene.add(pl);
+const pl2=new THREE.PointLight(0x3B7597,.5,40);
+pl2.position.set(10,5,-5);scene.add(pl2);
 
-// ── Materials ────────────────────────────────────────────────
-function matWire(col, opacity=1) {
-  return new THREE.MeshBasicMaterial({ color: col, wireframe: true, transparent: opacity < 1, opacity });
+/* Fog — creates depth behind glass panels */
+function updateFog(){
+  const dark=root.dataset.theme==="dark";
+  scene.fog=new THREE.FogExp2(dark?0x06111a:0xdff0f5,.035);
+  renderer.setClearColor(dark?0x06111a:0xdff0f5,1);
 }
-function matSolid(col, opacity=0.85) {
-  return new THREE.MeshPhongMaterial({ color: col, transparent: true, opacity, shininess: 40 });
-}
+updateFog();
 
-// ════════════════════════════════════════════════════════════
-// GEOMETRY GROUPS — one per section
-// ════════════════════════════════════════════════════════════
+/* ── HELPERS ─────────────────────────────────── */
+function wire(geo,col,op=.55){return new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op}))}
+function solid(geo,col,op=.8){return new THREE.Mesh(geo,new THREE.MeshPhongMaterial({color:col,transparent:true,opacity:op,shininess:50}))}
 
-// ── GROUP 0: Hero — floating icosahedra cluster ───────────────
-const g0 = new THREE.Group();
-scene.add(g0);
-const heroShapes = [];
-const icoGeo = new THREE.IcosahedronGeometry(1, 0);
+/* ═══════════════════════════════════════════════
+   SCENE GROUPS — one per section
+═══════════════════════════════════════════════ */
 
-const heroConfigs = [
-  { r:2.2, col: C.sky,   wire: false, scale: 1.0, speed: 0.003 },
-  { r:3.8, col: C.steel, wire: true,  scale: 0.65, speed: -0.002 },
-  { r:1.5, col: C.mint,  wire: false, scale: 0.45, speed: 0.005 },
-  { r:4.5, col: C.navy,  wire: false, scale: 0.8, speed: 0.0015 },
-  { r:2.8, col: C.sky,   wire: true,  scale: 0.55, speed: -0.004 },
-  { r:5.2, col: C.steel, wire: false, scale: 0.4,  speed: 0.0025 },
-  { r:3.2, col: C.mint,  wire: true,  scale: 0.7,  speed: -0.0018 },
+/* ── G0 HERO: Icosahedra constellation ──────── */
+const g0=new THREE.Group();scene.add(g0);
+const configs=[
+  {r:2.4,col:C.sky,  wf:false,sc:.95,sp:.0028},
+  {r:3.9,col:C.steel,wf:true, sc:.62,sp:-.0019},
+  {r:1.7,col:C.mint, wf:false,sc:.42,sp:.0048},
+  {r:4.8,col:C.navy, wf:false,sc:.78,sp:.0014},
+  {r:2.9,col:C.sky,  wf:true, sc:.52,sp:-.0038},
+  {r:5.4,col:C.steel,wf:false,sc:.38,sp:.0022},
+  {r:3.3,col:C.mint, wf:true, sc:.68,sp:-.0017},
 ];
-heroConfigs.forEach((cfg, i) => {
-  const angle = (i / heroConfigs.length) * Math.PI * 2;
-  const mat = cfg.wire ? matWire(cfg.col, 0.6) : matSolid(cfg.col, 0.75);
-  const m = new THREE.Mesh(icoGeo, mat);
-  m.scale.setScalar(cfg.scale);
-  m.position.set(
-    Math.cos(angle) * cfg.r + 4,
-    Math.sin(angle) * cfg.r * 0.6,
-    (Math.random() - .5) * 3
-  );
-  m.userData = { baseAngle: angle, r: cfg.r, speed: cfg.speed };
-  g0.add(m);
-  heroShapes.push(m);
+const icoG=new THREE.IcosahedronGeometry(1,0);
+const heroMeshes=configs.map((c,i)=>{
+  const a=(i/configs.length)*Math.PI*2;
+  const m=c.wf?wire(icoG,c.col,.5):solid(icoG,c.col,.72);
+  m.scale.setScalar(c.sc);
+  m.position.set(Math.cos(a)*c.r+4.5,Math.sin(a)*c.r*.6,(Math.random()-.5)*2.5);
+  m.userData={a,r:c.r,sp:c.sp};
+  g0.add(m);return m;
 });
+const bigIco=wire(new THREE.IcosahedronGeometry(2.4,1),C.sky,.22);
+bigIco.position.set(5,0,-2.5);g0.add(bigIco);
 
-// Large central icosahedron (wireframe)
-const centerIco = new THREE.Mesh(
-  new THREE.IcosahedronGeometry(2.2, 1),
-  matWire(C.sky, 0.35)
-);
-centerIco.position.set(5, 0, -2);
-g0.add(centerIco);
-
-// ── GROUP 1: Work — circuit / node graph ──────────────────────
-const g1 = new THREE.Group();
-g1.position.set(0, 0, 0);
-scene.add(g1);
-
-// Node spheres
-const nodeGeo = new THREE.SphereGeometry(0.18, 8, 8);
-const nodes = [];
-const nodePositions = [];
-for (let i = 0; i < 22; i++) {
-  const theta = Math.random() * Math.PI * 2;
-  const phi   = Math.acos(2 * Math.random() - 1);
-  const r = 2.5 + Math.random() * 3;
-  const p = new THREE.Vector3(
-    Math.sin(phi) * Math.cos(theta) * r + 5,
-    Math.sin(phi) * Math.sin(theta) * r * 0.7,
-    Math.cos(phi) * r * 0.5
-  );
-  nodePositions.push(p);
-  const col = [C.sky, C.mint, C.steel][Math.floor(Math.random()*3)];
-  const n = new THREE.Mesh(nodeGeo, new THREE.MeshPhongMaterial({ color: col, emissive: col, emissiveIntensity: 0.4 }));
-  n.position.copy(p);
-  n.userData.speed = (Math.random() - .5) * 0.01;
-  g1.add(n);
-  nodes.push(n);
+/* ── G1 WORK: Node graph ─────────────────────── */
+const g1=new THREE.Group();scene.add(g1);
+const nodePts=[];const nodeMeshes=[];
+for(let i=0;i<24;i++){
+  const th=Math.random()*Math.PI*2;
+  const ph=Math.acos(2*Math.random()-1);
+  const r=2.8+Math.random()*3.2;
+  const p=new THREE.Vector3(Math.sin(ph)*Math.cos(th)*r+4.5,Math.sin(ph)*Math.sin(th)*r*.65,Math.cos(ph)*r*.45);
+  nodePts.push(p);
+  const col=[C.sky,C.mint,C.steel][i%3];
+  const m=new THREE.Mesh(new THREE.SphereGeometry(.16,8,8),
+    new THREE.MeshPhongMaterial({color:col,emissive:col,emissiveIntensity:.35}));
+  m.position.copy(p);m.userData.spd=(Math.random()-.5)*.009;
+  g1.add(m);nodeMeshes.push(m);
 }
-// Edges (lines between nearby nodes)
-const edgeMatl = new THREE.LineBasicMaterial({ color: C.steel, transparent: true, opacity: 0.4 });
-for (let a = 0; a < nodePositions.length; a++) {
-  for (let b = a+1; b < nodePositions.length; b++) {
-    if (nodePositions[a].distanceTo(nodePositions[b]) < 3.8) {
-      const pts = [nodePositions[a], nodePositions[b]];
-      const geo = new THREE.BufferGeometry().setFromPoints(pts);
-      g1.add(new THREE.Line(geo, edgeMatl));
-    }
-  }
+const eLmat=new THREE.LineBasicMaterial({color:C.steel,transparent:true,opacity:.35});
+for(let a=0;a<nodePts.length;a++)for(let b=a+1;b<nodePts.length;b++){
+  if(nodePts[a].distanceTo(nodePts[b])<3.6)
+    g1.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([nodePts[a],nodePts[b]]),eLmat));
 }
 
-// ── GROUP 2: Extensions — three orbiting rings ─────────────────
-const g2 = new THREE.Group();
-g2.position.set(0, 0, 0);
-scene.add(g2);
-const rings = [];
-[
-  { r: 2.8, col: C.sky,   tilt: 0,             speed: 0.004 },
-  { r: 3.6, col: C.mint,  tilt: Math.PI/3,      speed: -0.003 },
-  { r: 4.4, col: C.steel, tilt: Math.PI/2,      speed: 0.0025 },
-].forEach(cfg => {
-  const geo = new THREE.TorusGeometry(cfg.r, 0.04, 8, 80);
-  const mat = new THREE.MeshBasicMaterial({ color: cfg.col, transparent: true, opacity: 0.7 });
-  const ring = new THREE.Mesh(geo, mat);
-  ring.rotation.x = cfg.tilt;
-  ring.position.set(5, 0, 0);
-  ring.userData.speed = cfg.speed;
-  g2.add(ring);
-  rings.push(ring);
-  // Small spheres on ring path
-  for (let i = 0; i < 6; i++) {
-    const a = (i/6) * Math.PI * 2;
-    const bead = new THREE.Mesh(
-      new THREE.SphereGeometry(0.12, 6, 6),
-      new THREE.MeshPhongMaterial({ color: cfg.col, emissive: cfg.col, emissiveIntensity: 0.5 })
-    );
-    bead.position.set(
-      Math.cos(a) * cfg.r + 5,
-      Math.sin(a) * cfg.r * Math.cos(cfg.tilt),
-      Math.sin(a) * cfg.r * Math.sin(cfg.tilt)
-    );
-    bead.userData.ringR = cfg.r;
-    bead.userData.tilt = cfg.tilt;
-    bead.userData.baseAngle = a;
-    bead.userData.speed = cfg.speed;
-    g2.add(bead);
+/* ── G2 EXTENSIONS: Orbital rings ───────────── */
+const g2=new THREE.Group();scene.add(g2);
+const rings=[];
+[{r:2.9,col:C.sky,tilt:0,sp:.0038},{r:3.7,col:C.mint,tilt:Math.PI/3,sp:-.003},{r:4.6,col:C.steel,tilt:Math.PI/2,sp:.0024}].forEach(c=>{
+  const r=new THREE.Mesh(new THREE.TorusGeometry(c.r,.04,8,80),
+    new THREE.MeshBasicMaterial({color:c.col,transparent:true,opacity:.65}));
+  r.rotation.x=c.tilt;r.position.set(4.5,0,0);r.userData.sp=c.sp;
+  g2.add(r);rings.push(r);
+  for(let i=0;i<6;i++){
+    const a=(i/6)*Math.PI*2;
+    const b=new THREE.Mesh(new THREE.SphereGeometry(.13,6,6),
+      new THREE.MeshPhongMaterial({color:c.col,emissive:c.col,emissiveIntensity:.45}));
+    b.position.set(Math.cos(a)*c.r+4.5,Math.sin(a)*c.r*Math.cos(c.tilt),Math.sin(a)*c.r*Math.sin(c.tilt));
+    b.userData={rr:c.r,tilt:c.tilt,ba:a,sp:c.sp};
+    g2.add(b);
   }
 });
-// Central sphere
-const coreSphere = new THREE.Mesh(
-  new THREE.SphereGeometry(0.9, 16, 16),
-  new THREE.MeshPhongMaterial({ color: C.navy, emissive: C.sky, emissiveIntensity: 0.15, shininess: 80 })
-);
-coreSphere.position.set(5, 0, 0);
-g2.add(coreSphere);
+const core=new THREE.Mesh(new THREE.SphereGeometry(.9,16,16),
+  new THREE.MeshPhongMaterial({color:C.navy,emissive:C.sky,emissiveIntensity:.12,shininess:90}));
+core.position.set(4.5,0,0);g2.add(core);
 
-// ── GROUP 3: Skills — DNA helix ────────────────────────────────
-const g3 = new THREE.Group();
-g3.position.set(0, 0, 0);
-scene.add(g3);
-const helixPoints = { a: [], b: [] };
-const numHelixPts = 40;
-for (let i = 0; i < numHelixPts; i++) {
-  const t = i / (numHelixPts-1);
-  const angle = t * Math.PI * 5;
-  const y = (t - .5) * 9;
-  const pA = new THREE.Vector3(Math.cos(angle) * 2.2 + 5, y, Math.sin(angle) * 2.2);
-  const pB = new THREE.Vector3(Math.cos(angle + Math.PI) * 2.2 + 5, y, Math.sin(angle + Math.PI) * 2.2);
-  helixPoints.a.push(pA);
-  helixPoints.b.push(pB);
+/* ── G3 SKILLS: DNA helix ────────────────────── */
+const g3=new THREE.Group();scene.add(g3);
+const hA=[],hB=[];const N=42;
+for(let i=0;i<N;i++){
+  const t=i/(N-1),ang=t*Math.PI*5.5,y=(t-.5)*10;
+  hA.push(new THREE.Vector3(Math.cos(ang)*2.3+4.5,y,Math.sin(ang)*2.3));
+  hB.push(new THREE.Vector3(Math.cos(ang+Math.PI)*2.3+4.5,y,Math.sin(ang+Math.PI)*2.3));
 }
-// Helix backbone lines
-const helixMatA = new THREE.LineBasicMaterial({ color: C.sky,  transparent: true, opacity: 0.8 });
-const helixMatB = new THREE.LineBasicMaterial({ color: C.mint, transparent: true, opacity: 0.8 });
-g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(helixPoints.a), helixMatA));
-g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(helixPoints.b), helixMatB));
-// Rungs
-const rungMat = new THREE.LineBasicMaterial({ color: C.steel, transparent: true, opacity: 0.45 });
-for (let i = 0; i < numHelixPts; i += 3) {
-  const geo = new THREE.BufferGeometry().setFromPoints([helixPoints.a[i], helixPoints.b[i]]);
-  g3.add(new THREE.Line(geo, rungMat));
-  // Node beads
-  [helixPoints.a[i], helixPoints.b[i]].forEach((p, j) => {
-    const bead = new THREE.Mesh(
-      new THREE.SphereGeometry(0.14, 7, 7),
-      new THREE.MeshPhongMaterial({
-        color: j === 0 ? C.sky : C.mint,
-        emissive: j === 0 ? C.sky : C.mint,
-        emissiveIntensity: 0.4
-      })
-    );
-    bead.position.copy(p);
-    g3.add(bead);
+g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(hA),new THREE.LineBasicMaterial({color:C.sky,transparent:true,opacity:.8})));
+g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(hB),new THREE.LineBasicMaterial({color:C.mint,transparent:true,opacity:.8})));
+for(let i=0;i<N;i+=3){
+  g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([hA[i],hB[i]]),new THREE.LineBasicMaterial({color:C.steel,transparent:true,opacity:.4})));
+  [[hA[i],C.sky],[hB[i],C.mint]].forEach(([p,c])=>{
+    const b=new THREE.Mesh(new THREE.SphereGeometry(.14,7,7),
+      new THREE.MeshPhongMaterial({color:c,emissive:c,emissiveIntensity:.38}));
+    b.position.copy(p);g3.add(b);
   });
 }
 
-// ── Starfield ─────────────────────────────────────────────────
-const starCount = 260;
-const starPos = new Float32Array(starCount * 3);
-for (let i = 0; i < starCount; i++) {
-  starPos[i*3]   = (Math.random() - .5) * 60;
-  starPos[i*3+1] = (Math.random() - .5) * 40;
-  starPos[i*3+2] = -10 - Math.random() * 20;
-}
-const starGeo = new THREE.BufferGeometry();
-starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
-const starMat = new THREE.PointsMaterial({ color: C.steel, size: 0.06, transparent: true, opacity: 0.5 });
-const stars = new THREE.Points(starGeo, starMat);
+/* ── Stars ───────────────────────────────────── */
+const sfPos=new Float32Array(300*3);
+for(let i=0;i<300;i++){sfPos[i*3]=(Math.random()-.5)*70;sfPos[i*3+1]=(Math.random()-.5)*45;sfPos[i*3+2]=-12-Math.random()*22}
+const sfGeo=new THREE.BufferGeometry();sfGeo.setAttribute("position",new THREE.BufferAttribute(sfPos,3));
+const stars=new THREE.Points(sfGeo,new THREE.PointsMaterial({color:C.steel,size:.07,transparent:true,opacity:.45}));
 scene.add(stars);
 
-// ════════════════════════════════════════════════════════════
-// SCENE CAMERA KEYFRAMES (positions per section)
-// ════════════════════════════════════════════════════════════
-const keyframes = [
-  // §0 Hero
-  { camPos: new THREE.Vector3(0, 0, 14),     camTarget: new THREE.Vector3(0, 0, 0) },
-  // §1 Work
-  { camPos: new THREE.Vector3(-4, 1.5, 11),  camTarget: new THREE.Vector3(2, 0, 0) },
-  // §2 Extensions
-  { camPos: new THREE.Vector3(2, -1, 10),    camTarget: new THREE.Vector3(2, 0, 0) },
-  // §3 Skills
-  { camPos: new THREE.Vector3(-2, 0, 12),    camTarget: new THREE.Vector3(2, 0, 0) },
+/* ── Camera keyframes ────────────────────────── */
+const KF=[
+  {p:new THREE.Vector3(0,0,14),   t:new THREE.Vector3(0,0,0)},
+  {p:new THREE.Vector3(-3.5,1.5,11), t:new THREE.Vector3(2,0,0)},
+  {p:new THREE.Vector3(2,-1,10),  t:new THREE.Vector3(2.5,0,0)},
+  {p:new THREE.Vector3(-2,.5,12), t:new THREE.Vector3(2,0,0)},
 ];
+const groups=[g0,g1,g2,g3];
+const gOp=[1,0,0,0];
 
-// Group visibility targets per section
-// opacity multipliers to lerp toward
-const groupTargets = [
-  [1, 0, 0, 0],  // section 0: g0 full, rest fade
-  [0, 1, 0, 0],
-  [0, 0, 1, 0],
-  [0, 0, 0, 1],
-];
-const groupOpacities = [1, 0, 0, 0]; // current values
+/* Bake base opacities */
+groups.forEach(g=>g.traverse(o=>{if((o.isMesh||o.isLine||o.isPoints)&&o.material)o.material._bop=o.material.opacity}));
 
-// ── Actual group opacity helper ──────────────────────────────
-function setGroupOpacity(group, alpha) {
-  group.traverse(obj => {
-    if (obj.isMesh || obj.isLine || obj.isPoints) {
-      if (obj.material) {
-        obj.material.transparent = true;
-        obj.material.opacity = (obj.material._baseOpacity ?? obj.material.opacity) * alpha;
-        if (!('_baseOpacity' in obj.material)) obj.material._baseOpacity = obj.material.opacity;
-      }
+function setGOp(g,a){
+  g.traverse(o=>{
+    if((o.isMesh||o.isLine||o.isPoints)&&o.material){
+      const b=o.material._bop??o.material.opacity;
+      o.material.opacity=b*a;
     }
   });
 }
 
-// Bake base opacities
-[g0, g1, g2, g3].forEach(g => {
-  g.traverse(obj => {
-    if ((obj.isMesh || obj.isLine || obj.isPoints) && obj.material) {
-      obj.material._baseOpacity = obj.material.opacity;
-    }
-  });
-});
+/* Mouse parallax */
+const mouse={x:0,y:0};
+window.addEventListener("mousemove",e=>{mouse.x=(e.clientX/innerWidth-.5)*2;mouse.y=(e.clientY/innerHeight-.5)*2});
 
-function updateSceneTheme() {
-  const isDark = root.dataset.theme === "dark";
-  renderer.setClearColor(isDark ? 0x07131d : 0xeef5fa, isDark ? 1 : 1);
-}
-updateSceneTheme();
-
-// Mouse parallax
-let mouse = new THREE.Vector2(0, 0);
-window.addEventListener("mousemove", e => {
-  mouse.x = (e.clientX / innerWidth  - .5) * 2;
-  mouse.y = (e.clientY / innerHeight - .5) * 2;
-});
-
-// ── Resize ────────────────────────────────────────────────────
-window.addEventListener("resize", () => {
-  camera.aspect = innerWidth / innerHeight;
+window.addEventListener("resize",()=>{
+  camera.aspect=innerWidth/innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
+  renderer.setSize(innerWidth,innerHeight);
 });
 
-// ════════════════════════════════════════════════════════════
-// ANIMATION LOOP
-// ════════════════════════════════════════════════════════════
-let camPosTarget  = new THREE.Vector3().copy(keyframes[0].camPos);
-let camLookTarget = new THREE.Vector3().copy(keyframes[0].camTarget);
-let camPosCurrent = new THREE.Vector3().copy(keyframes[0].camPos);
-let camLookCurrent = new THREE.Vector3().copy(keyframes[0].camTarget);
-let time = 0;
+/* ═══════════════════════════════════════════════
+   RENDER LOOP
+═══════════════════════════════════════════════ */
+const camP=new THREE.Vector3().copy(KF[0].p);
+const camL=new THREE.Vector3().copy(KF[0].t);
+let t=0;
 
-function getScrollSectionT() {
-  // Returns [sectionIndex, t] where t is 0..1 progress within the transition
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  const sp = clamp(scrollY / maxScroll, 0, 1);
-  const raw = sp * (sections.length - 1);
-  const sec = Math.floor(clamp(raw, 0, sections.length - 2));
-  const t   = raw - sec;
-  return [sec, t];
-}
-
-function animate() {
+function animate(){
   requestAnimationFrame(animate);
-  time += 0.01;
+  t+=.01;
 
-  const [sec, t] = getScrollSectionT();
-  const secF = clamp(sec + t, 0, sections.length - 1);
+  /* Scroll-driven camera */
+  const maxS=Math.max(1,document.body.scrollHeight-innerHeight);
+  const sp=clamp(scrollY/maxS,0,1);
+  const raw=clamp(sp*(KF.length-1),0,KF.length-1);
+  const sa=clamp(Math.floor(raw),0,KF.length-2);
+  const sb=sa+1;
+  const blend=clamp(ease(raw-sa),0,1);
 
-  // ── Camera interpolation ─────────────────────────────────
-  const secA = Math.floor(secF);
-  const secB = Math.min(secA + 1, keyframes.length - 1);
-  const blend = easeInOut(secF - secA);
+  const tP=new THREE.Vector3().lerpVectors(KF[sa].p,KF[sb].p,blend);
+  const tL=new THREE.Vector3().lerpVectors(KF[sa].t,KF[sb].t,blend);
+  tP.x+=mouse.x*.5;tP.y-=mouse.y*.35;
 
-  camPosTarget.lerpVectors(keyframes[secA].camPos, keyframes[secB].camPos, blend);
-  camLookTarget.lerpVectors(keyframes[secA].camTarget, keyframes[secB].camTarget, blend);
+  camP.lerp(tP,.042);camL.lerp(tL,.042);
+  camera.position.copy(camP);camera.lookAt(camL);
 
-  // Add mouse parallax
-  camPosTarget.x += mouse.x * 0.6;
-  camPosTarget.y -= mouse.y * 0.4;
-
-  // Smooth follow
-  camPosCurrent.lerp(camPosTarget, 0.045);
-  camLookCurrent.lerp(camLookTarget, 0.045);
-  camera.position.copy(camPosCurrent);
-  camera.lookAt(camLookCurrent);
-
-  // ── Group fade ────────────────────────────────────────────
-  const groups = [g0, g1, g2, g3];
-  groups.forEach((g, i) => {
-    // Target opacity: high when this is the current section
-    const dist = Math.abs(secF - i);
-    const target = dist < 1.2 ? clamp(1.0 - dist * 0.7, 0, 1) : 0;
-    groupOpacities[i] = lerp(groupOpacities[i], target, 0.06);
-    setGroupOpacity(g, groupOpacities[i]);
+  /* Group fade */
+  const secF=raw; // already clamped to KF.length-1
+  groups.forEach((g,i)=>{
+    const dist=Math.abs(secF-i);
+    const tgt=dist<1.1?clamp(1-dist*.75,0,1):0;
+    gOp[i]=lerp(gOp[i],tgt,.055);
+    setGOp(g,gOp[i]);
   });
 
-  // ── Object animations ─────────────────────────────────────
-
-  // G0: Hero — orbit icosahedra + gentle rotate
-  heroShapes.forEach(m => {
-    m.userData.baseAngle += m.userData.speed;
-    m.position.x = Math.cos(m.userData.baseAngle) * m.userData.r + 4;
-    m.position.y = Math.sin(m.userData.baseAngle) * m.userData.r * 0.6;
-    m.rotation.x += 0.008;
-    m.rotation.z += 0.005;
+  /* G0 — hero orbits */
+  heroMeshes.forEach(m=>{
+    m.userData.a+=m.userData.sp;
+    m.position.x=Math.cos(m.userData.a)*m.userData.r+4.5;
+    m.position.y=Math.sin(m.userData.a)*m.userData.r*.6;
+    m.rotation.x+=.007;m.rotation.z+=.004;
   });
-  centerIco.rotation.y += 0.003;
-  centerIco.rotation.x += 0.002;
+  bigIco.rotation.y+=.0025;bigIco.rotation.x+=.0015;
 
-  // G1: Work — nodes pulse + slight drift
-  nodes.forEach((n, i) => {
-    n.rotation.y += n.userData.speed;
-    const pulse = 1 + Math.sin(time * 1.5 + i * 0.7) * 0.12;
-    n.scale.setScalar(pulse);
+  /* G1 — node pulse */
+  nodeMeshes.forEach((n,i)=>{
+    n.rotation.y+=n.userData.spd;
+    n.scale.setScalar(1+Math.sin(t*1.4+i*.65)*.11);
   });
 
-  // G2: Extensions — rings rotate
-  rings.forEach(ring => {
-    ring.rotation.z += ring.userData.speed;
-  });
-  // Bead orbit on rings (children that are beads)
-  g2.children.forEach(child => {
-    if (child.userData.ringR) {
-      child.userData.baseAngle += child.userData.speed;
-      const a = child.userData.baseAngle;
-      const tilt = child.userData.tilt;
-      child.position.set(
-        Math.cos(a) * child.userData.ringR + 5,
-        Math.sin(a) * child.userData.ringR * Math.cos(tilt),
-        Math.sin(a) * child.userData.ringR * Math.sin(tilt)
-      );
+  /* G2 — ring + bead orbit */
+  rings.forEach(r=>{r.rotation.z+=r.userData.sp});
+  g2.children.forEach(ch=>{
+    if(ch.userData.rr){
+      ch.userData.ba+=ch.userData.sp;
+      const a=ch.userData.ba,tl=ch.userData.tilt,r=ch.userData.rr;
+      ch.position.set(Math.cos(a)*r+4.5,Math.sin(a)*r*Math.cos(tl),Math.sin(a)*r*Math.sin(tl));
     }
   });
-  coreSphere.rotation.y += 0.006;
+  core.rotation.y+=.005;
 
-  // G3: Skills — helix rotate
-  g3.rotation.y += 0.004;
+  /* G3 — helix spin */
+  g3.rotation.y+=.0038;
 
-  // Stars gentle drift
-  stars.rotation.y += 0.0003;
-  stars.rotation.x += 0.0001;
+  stars.rotation.y+=.0003;stars.rotation.x+=.0001;
 
-  renderer.render(scene, camera);
+  renderer.render(scene,camera);
 }
 animate();
-
 </script>
 </body>
 </html>
